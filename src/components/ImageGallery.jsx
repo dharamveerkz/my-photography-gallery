@@ -1,50 +1,27 @@
 // src/components/ImageGallery.jsx
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Masonry from "masonry-layout";
 import imagesLoaded from "imagesloaded";
 
+/* global __UPLOAD_LIST__ */
+const UPLOADS = __UPLOAD_LIST__;
+
+const WIDTHS = [400, 600, 900, 1200];
+
+const cdn = (path, w) =>
+  `/.netlify/images?url=${encodeURIComponent(path)}&w=${w}&q=75`;
+
+const buildSrcSet = (path) =>
+  WIDTHS.map((w) => `${cdn(path, w)} ${w}w`).join(", ");
+
 const ImageGallery = () => {
-  const [imageIndices, setImageIndices] = useState([]);
-  const [loading, setLoading] = useState(true);
   const galleryRef = useRef(null);
   const masonryInstance = useRef(null);
 
   useEffect(() => {
-    const maxTries = 200;
-    const foundImages = [];
-    let loadCount = 0;
-
-    const checkImageExists = (url, index) => {
-      const img = new Image();
-      img.src = url;
-
-      img.onload = () => {
-        foundImages.push(index);
-        loadCount++;
-        if (loadCount === maxTries) finishLoading(foundImages);
-      };
-
-      img.onerror = () => {
-        loadCount++;
-        if (loadCount === maxTries) finishLoading(foundImages);
-      };
-    };
-
-    const finishLoading = (found) => {
-      setImageIndices(found);
-      setLoading(false);
-    };
-
-    for (let i = 1; i <= maxTries; i++) {
-      const imageUrl = `/uploads/img${i}.jpg`;
-      checkImageExists(imageUrl, i);
-    }
-  }, []);
-
-  useEffect(() => {
     const galleryElement = galleryRef.current;
-    if (!galleryElement || imageIndices.length === 0) return;
+    if (!galleryElement || UPLOADS.length === 0) return;
 
     const setupMasonry = () => {
       masonryInstance.current = new Masonry(galleryElement, {
@@ -53,32 +30,28 @@ const ImageGallery = () => {
         percentPosition: true,
         gutter: 15,
       });
-
-      const handleResize = () => masonryInstance.current?.layout();
-      window.addEventListener("resize", handleResize);
-
       masonryInstance.current.layout();
-
-      return () => {
-        window.removeEventListener("resize", handleResize);
-        masonryInstance.current?.destroy();
-      };
     };
 
-    const cleanup = imagesLoaded(galleryElement, setupMasonry);
+    const handleResize = () => masonryInstance.current?.layout();
+    window.addEventListener("resize", handleResize);
+
+    imagesLoaded(galleryElement, setupMasonry);
+
+    const observer = new MutationObserver(() => {
+      masonryInstance.current?.reloadItems?.();
+      masonryInstance.current?.layout?.();
+    });
+    observer.observe(galleryElement, { childList: true, subtree: true });
 
     return () => {
+      window.removeEventListener("resize", handleResize);
+      observer.disconnect();
       masonryInstance.current?.destroy();
     };
-  }, [imageIndices]);
+  }, []);
 
-  if (loading) {
-    return (
-      <p style={{ textAlign: "center", margin: "2rem" }}>Loading gallery...</p>
-    );
-  }
-
-  if (imageIndices.length === 0) {
+  if (UPLOADS.length === 0) {
     return (
       <p style={{ textAlign: "center", margin: "2rem" }}>No images found.</p>
     );
@@ -87,26 +60,32 @@ const ImageGallery = () => {
   return (
     <section id="image-gallery" ref={galleryRef}>
       <div className="grid-sizer"></div>
-      {imageIndices.map((index) => {
-        const imageUrl = `/uploads/img${index}.jpg`;
+      {UPLOADS.map((filename, i) => {
+        const originalUrl = `/uploads/${filename}`;
+        const isAboveFold = i < 6;
         return (
-          <div className="masonry-item" key={index}>
+          <div className="masonry-item" key={filename}>
             <div className="image-container">
               <img
-                src={imageUrl}
-                alt={`Gallery ${index}`}
-                title={`img${index}.jpg`}
-                loading="lazy"
+                src={cdn(originalUrl, 600)}
+                srcSet={buildSrcSet(originalUrl)}
+                sizes="(max-width: 576px) 100vw, (max-width: 992px) 50vw, 400px"
+                alt={`Gallery ${filename}`}
+                title={filename}
+                loading={isAboveFold ? "eager" : "lazy"}
                 decoding="async"
-                fetchPriority="low"
-                onError={(e) => (e.target.style.display = "none")}
+                fetchPriority={isAboveFold ? "high" : "low"}
+                onLoad={() => masonryInstance.current?.layout?.()}
+                onError={(e) => {
+                  e.target.style.display = "none";
+                }}
               />
             </div>
             <a
-              href={imageUrl}
+              href={originalUrl}
               download
               className="download-btn"
-              aria-label={`Download image ${index}`}
+              aria-label={`Download ${filename}`}
             >
               <img src="/dw.png" alt="Download" className="download-icon" />
             </a>
