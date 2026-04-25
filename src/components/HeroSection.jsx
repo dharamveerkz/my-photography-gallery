@@ -10,9 +10,9 @@ function HeroSection() {
   // Handle scroll effect for navbar
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 10);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -35,7 +35,7 @@ function HeroSection() {
   ];
 
   return (
-    <header className="relative min-h-screen bg-gradient-to-br from-gray-900 via-photo-900 to-black overflow-hidden">
+    <header className="relative h-screen bg-gradient-to-br from-gray-900 via-photo-900 to-black overflow-hidden">
       
       {/* 🎨 Decorative Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
@@ -50,30 +50,30 @@ function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
       </div>
 
-      {/* 🧭 Navigation */}
+      {/* 🧭 Navigation - WHITE BACKGROUND */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? "bg-gray-900/80 backdrop-blur-lg border-b border-gray-800 py-3" 
-          : "bg-transparent py-5"
+          ? "bg-white/95 backdrop-blur-md shadow-lg shadow-gray-900/10 py-3" 
+          : "bg-white py-4"
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             
-            {/* Logo */}
+            {/* Logo - Dark text for white bg */}
             <Link 
               to="/" 
               className="flex items-center gap-2 group"
               aria-label="Dharamveer - Home"
             >
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-sm">
                 <span className="text-black font-bold text-sm">D</span>
               </div>
-              <span className="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">
+              <span className="text-xl font-bold text-gray-900 group-hover:text-amber-600 transition-colors">
                 Dharamveer
               </span>
             </Link>
 
-            {/* Desktop Navigation */}
+            {/* Desktop Navigation - Dark text */}
             <div className="hidden md:flex items-center gap-8">
               {navLinks.map((link) => (
                 <Link
@@ -81,30 +81,30 @@ function HeroSection() {
                   to={link.path}
                   className={`text-sm font-medium transition-colors relative py-2 ${
                     location.pathname === link.path
-                      ? "text-amber-400"
-                      : "text-gray-300 hover:text-white"
+                      ? "text-amber-600"
+                      : "text-gray-700 hover:text-gray-900"
                   }`}
                 >
                   {link.name}
                   {location.pathname === link.path && (
-                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-400 rounded-full"></span>
+                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-500 rounded-full"></span>
                   )}
                 </Link>
               ))}
               
-              {/* CTA Button */}
+              {/* CTA Button - Visible on white */}
               <Link
                 to="/contact"
-                className="px-5 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-semibold rounded-xl transition-all shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 hover:-translate-y-0.5 text-sm"
+                className="px-5 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-semibold rounded-xl transition-all shadow-md shadow-amber-500/25 hover:shadow-amber-500/40 hover:-translate-y-0.5 text-sm"
               >
                 Let's Talk
               </Link>
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu Button - Dark icon */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 text-gray-300 hover:text-white transition-colors"
+              className="md:hidden p-2 text-gray-700 hover:text-gray-900 transition-colors"
               aria-label="Toggle menu"
               aria-expanded={isMobileMenuOpen}
             >
@@ -113,8 +113,8 @@ function HeroSection() {
           </div>
         </div>
 
-        {/* Mobile Menu Dropdown */}
-        <div className={`md:hidden absolute top-full left-0 right-0 bg-gray-900/95 backdrop-blur-lg border-b border-gray-800 transition-all duration-300 overflow-hidden ${
+        {/* Mobile Menu Dropdown - White background */}
+        <div className={`md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-lg transition-all duration-300 overflow-hidden ${
           isMobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}>
           <div className="px-4 py-4 space-y-2">
@@ -124,8 +124,8 @@ function HeroSection() {
                 to={link.path}
                 className={`block px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
                   location.pathname === link.path
-                    ? "bg-amber-500/10 text-amber-400"
-                    : "text-gray-300 hover:bg-gray-800 hover:text-white"
+                    ? "bg-amber-50 text-amber-600"
+                    : "text-gray-700 hover:bg-gray-50 hover:text-gray-900"
                 }`}
               >
                 {link.name}
@@ -142,7 +142,7 @@ function HeroSection() {
       </nav>
 
       {/* 🎬 Hero Content */}
-      <main className="relative z-10 min-h-screen flex items-center">
+      <main className="relative z-10 h-screen flex items-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             
@@ -150,7 +150,7 @@ function HeroSection() {
             <div className="space-y-8 text-center lg:text-left animate-slide-up">
               
               {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/10 border border-amber-500/30 rounded-full">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/10 border border-amber-500/30 rounded-full mx-auto lg:mx-0">
                 <span className="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></span>
                 <span className="text-amber-400 text-sm font-medium">Available for projects</span>
               </div>
@@ -186,7 +186,7 @@ function HeroSection() {
                 </Link>
                 <Link
                   to="/contact"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gray-800 hover:bg-gray-700 border border-gray-700 hover:border-amber-500/50 text-white font-medium rounded-2xl transition-all hover:-translate-y-1"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 hover:border-amber-500/50 text-white font-medium rounded-2xl transition-all hover:-translate-y-1"
                 >
                   <i className="fas fa-envelope"></i>
                   <span>Get in Touch</span>
@@ -203,9 +203,9 @@ function HeroSection() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.name}
-                    className="w-10 h-10 rounded-xl bg-gray-800 hover:bg-amber-500/10 border border-gray-700 hover:border-amber-500/50 flex items-center justify-center transition-all group"
+                    className="w-10 h-10 rounded-xl bg-white/10 hover:bg-amber-500/10 border border-white/20 hover:border-amber-500/50 flex items-center justify-center transition-all group"
                   >
-                    <i className={`${social.icon} text-gray-400 group-hover:text-amber-400 transition-colors`}></i>
+                    <i className={`${social.icon} text-gray-300 group-hover:text-amber-400 transition-colors`}></i>
                   </a>
                 ))}
               </div>
@@ -232,6 +232,7 @@ function HeroSection() {
                     alt="Dharamveer Kumar - Photographer & Creative Developer"
                     className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
                     loading="eager"
+                    fetchPriority="high"
                   />
                   
                   {/* Overlay gradient */}
