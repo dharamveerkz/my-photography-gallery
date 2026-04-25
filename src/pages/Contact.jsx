@@ -55,9 +55,9 @@ const Contact = () => {
 
   const socialLinks = [
     { name: "GitHub", icon: "fab fa-github", href: "https://github.com/dharamveerkz" },
-    { name: "X/Twitter", icon: "fab fa-x-twitter", href: "https://x.com/dharamveerkz" },
-    { name: "Instagram", icon: "fab fa-instagram", href: "https://www.instagram.com/dharamveerkz/" },
-    { name: "LinkedIn", icon: "fab fa-linkedin-in", href: "https://www.linkedin.com/in/dharamveerkz/" },
+    { name: "X/Twitter", icon: "fab fa-x-twitter", href: "https://x.com/imdharamvrr" },
+    { name: "Instagram", icon: "fab fa-instagram", href: "https://www.instagram.com/imdharamvrr/" },
+    { name: "LinkedIn", icon: "fab fa-linkedin-in", href: "https://www.linkedin.com/in/dharamveerkr/" },
   ];
 
   return (
