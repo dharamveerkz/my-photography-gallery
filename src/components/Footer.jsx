@@ -151,29 +151,6 @@ const Footer = () => {
             ))}
           </div>
         </div>
-
-        {/* Newsletter / Subscribe - Cleaner Input */}
-        <div className="border-t border-gray-800 pt-10">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <div>
-              <h4 className="text-white font-semibold text-lg">Subscribe to my lens</h4>
-              <p className="text-gray-500 text-sm">Get exclusive photography tips & updates.</p>
-            </div>
-            <form className="flex flex-col sm:flex-row gap-3 w-full max-w-md">
-              <input
-                type="email"
-                placeholder="your@email.com"
-                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all text-base"
-              />
-              <button
-                type="submit"
-                className="px-8 py-3 bg-orange-500 hover:bg-orange-600 text-black font-bold rounded-lg transition-all duration-300 shadow-md shadow-orange-500/20 whitespace-nowrap text-base"
-              >
-                Subscribe
-              </button>
-            </form>
-          </div>
-        </div>
       </div>
 
       {/* Bottom Bar */}
