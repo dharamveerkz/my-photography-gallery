@@ -29,8 +29,8 @@ function HeroSection() {
   ];
 
   const socialLinks = [
-    { name: "Instagram", href: "https://www.instagram.com/dharamveerkz/", icon: "fab fa-instagram" },
-    { name: "LinkedIn", href: "https://www.linkedin.com/in/dharamveerkz/", icon: "fab fa-linkedin-in" },
+    { name: "Instagram", href: "https://www.instagram.com/imdharamvrr/", icon: "fab fa-instagram" },
+    { name: "LinkedIn", href: "https://www.linkedin.com/in/dharamveerkr/", icon: "fab fa-linkedin-in" },
     { name: "GitHub", href: "https://github.com/dharamveerkz", icon: "fab fa-github" },
   ];
 
