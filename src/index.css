@@ -14,3 +14,51 @@ body {
   min-height: 100vh;
   font-family: "Open Sans", sans-serif;
 }
+
+/* Masonry Grid Layout */
+#image-gallery {
+  display: block;
+}
+
+#image-gallery .grid-sizer {
+  width: 25%; /* 4 columns on desktop */
+}
+
+#image-gallery .masonry-item {
+  width: 25%; /* 4 columns on desktop */
+  padding: 8px; /* Half of gutter (16px) */
+  box-sizing: border-box;
+}
+
+/* Tablet: 3 columns */
+@media (max-width: 1024px) {
+  #image-gallery .grid-sizer,
+  #image-gallery .masonry-item {
+    width: 33.333%;
+  }
+}
+
+/* Mobile: 2 columns */
+@media (max-width: 640px) {
+  #image-gallery .grid-sizer,
+  #image-gallery .masonry-item {
+    width: 50%;
+  }
+}
+
+/* Small mobile: 1 column */
+@media (max-width: 400px) {
+  #image-gallery .grid-sizer,
+  #image-gallery .masonry-item {
+    width: 100%;
+  }
+}
+
+/* Smooth animations */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
