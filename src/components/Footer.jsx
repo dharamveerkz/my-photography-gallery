@@ -52,7 +52,7 @@ const Footer = () => {
     }
   ];
 
-  const columns = [
+  const footerLinks = [
     {
       title: "Explore",
       links: [
@@ -66,7 +66,7 @@ const Footer = () => {
       links: [
         { label: "UI/UX Design", href: "https://www.linkedin.com/in/dharamveerkz/" },
         { label: "Graphic Design", href: "https://www.linkedin.com/in/dharamveerkz/" },
-        { label: "Photography", to: "/gallery?category=photography" }
+        { label: "Photography", to: "/gallery" }
       ]
     },
     {
@@ -74,33 +74,33 @@ const Footer = () => {
       links: [
         { label: "Graphics Course", href: "https://drive.google.com/file/d/1SZRLlAUG-1vIdgDmvCS-deKg-7XJeIJ3/view?usp=sharing" },
         { label: "Photography Course", href: "https://drive.google.com/file/d/1TTwAMbTvLGtcIDxTtBZd2lZ77HFLqJYV/view?usp=sharing" },
-        { label: "Telegram Community", href: "https://t.me/+4xorc7fy3vo2NWI1" }
+        { label: "Telegram", href: "https://t.me/+4xorc7fy3vo2NWI1" }
       ]
     }
   ];
 
   return (
-    <footer className="bg-gray-950 text-gray-300 border-t border-gray-800">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
+    <footer className="bg-black text-gray-400">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         
-        {/* Top Section: Brand + Social */}
-        <div className="flex flex-col lg:flex-row justify-between items-start gap-10 mb-12">
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8">
           
-          {/* Brand Area */}
-          <div className="space-y-5 max-w-md">
+          {/* Brand & Social - Full width on mobile, 4 cols on desktop */}
+          <div className="lg:col-span-4 space-y-6">
             <Link 
               to="/" 
-              className="inline-block text-3xl font-bold bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent"
+              className="inline-block text-2xl lg:text-3xl font-semibold text-white tracking-tight"
             >
               Dharamveer
             </Link>
-            {/* Improved Line Height and Color for readability */}
-            <p className="text-gray-400 text-base leading-relaxed font-light">
-              Capturing moments, crafting stories. Professional photography & creative design services for brands and individuals.
+            
+            <p className="text-sm lg:text-base leading-relaxed max-w-sm">
+              Professional photographer capturing moments and crafting visual stories for brands and individuals.
             </p>
             
-            {/* Social Icons - Lighter background, brighter icons */}
-            <div className="flex gap-4 pt-2">
+            {/* Social Icons */}
+            <div className="flex gap-3">
               {socialLinks.map((social) => (
                 <a
                   key={social.name}
@@ -108,7 +108,7 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.name}
-                  className="w-10 h-10 rounded-full bg-gray-800 hover:bg-orange-500 flex items-center justify-center text-gray-300 hover:text-white transition-all duration-300 shadow-lg"
+                  className="w-10 h-10 rounded-full bg-gray-900 hover:bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white transition-all duration-200"
                 >
                   {social.icon}
                 </a>
@@ -116,21 +116,20 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Link Columns - More spacing and better font size */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 w-full">
-            {columns.map((col) => (
-              <div key={col.title} className="space-y-4">
-                {/* Uppercase tracking for headers looks more premium */}
-                <h3 className="text-sm font-bold text-white uppercase tracking-widest mb-3">
-                  {col.title}
+          {/* Link Columns - Stack on mobile, 3 cols on desktop */}
+          <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 gap-8 lg:gap-6">
+            {footerLinks.map((column) => (
+              <div key={column.title}>
+                <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
+                  {column.title}
                 </h3>
                 <ul className="space-y-3">
-                  {col.links.map((link) => (
+                  {column.links.map((link) => (
                     <li key={link.label}>
                       {link.to ? (
                         <Link 
                           to={link.to}
-                          className="text-gray-400 hover:text-orange-400 text-base font-medium transition-colors duration-200 block"
+                          className="text-sm text-gray-400 hover:text-white transition-colors duration-200"
                         >
                           {link.label}
                         </Link>
@@ -139,7 +138,7 @@ const Footer = () => {
                           href={link.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-gray-400 hover:text-orange-400 text-base font-medium transition-colors duration-200 block"
+                          className="text-sm text-gray-400 hover:text-white transition-colors duration-200"
                         >
                           {link.label}
                         </a>
@@ -151,25 +150,20 @@ const Footer = () => {
             ))}
           </div>
         </div>
-      </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-gray-800 bg-gray-950">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-6">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm">
-            <p className="text-gray-500">
+        {/* Bottom Bar */}
+        <div className="border-t border-gray-900 mt-12 pt-8">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p className="text-sm text-gray-500">
               © {currentYear}{" "}
-              <Link to="/" className="text-orange-500 hover:text-orange-400 font-medium transition-colors">
-                Dharamveer
-              </Link>
-              . All rights reserved.
+              <span className="text-gray-400">Dharamveer</span>. All rights reserved.
             </p>
             <div className="flex gap-6">
-              <Link to="/privacy" className="text-gray-500 hover:text-orange-400 transition-colors">
-                Privacy Policy
+              <Link to="/privacy" className="text-sm text-gray-500 hover:text-white transition-colors">
+                Privacy
               </Link>
-              <Link to="/terms" className="text-gray-500 hover:text-orange-400 transition-colors">
-                Terms & Conditions
+              <Link to="/terms" className="text-sm text-gray-500 hover:text-white transition-colors">
+                Terms
               </Link>
             </div>
           </div>
