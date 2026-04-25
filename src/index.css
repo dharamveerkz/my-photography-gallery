@@ -1,20 +1,18 @@
-/* Global Reset */
+/* src/index.css */
+@import "tailwindcss";
+
+/* Optional: Keep your custom global resets if needed */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Open Sans", sans-serif;
 }
 
-/* Base Body Style */
 body {
-  margin: 0;
-  padding: 0;
   background-color: #000;
   color: #fff;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  font-family: "Open Sans", sans-serif;
 }
 
 /* Header / Hero Section */
