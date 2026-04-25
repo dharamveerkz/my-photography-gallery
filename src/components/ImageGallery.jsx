@@ -3,23 +3,19 @@ import React, { useEffect, useState, useRef, useCallback } from "react";
 import Masonry from "masonry-layout";
 import imagesLoaded from "imagesloaded";
 
-// 🎯 Image optimization config
+// 🎯 Image config - JPG ONLY
 const IMAGE_CONFIG = {
   basePath: "/uploads",
-  format: "webp",
-  fallbackFormat: "jpg",
+  format: "jpg",
   quality: 85,
   maxWidth: 1200,
   thumbWidth: 400,
 };
 
-// 🔄 Generate optimized image URL with fallback
+// 🔄 Generate optimized JPG image URL
 const getOptimizedSrc = (index, isThumbnail = false) => {
   const width = isThumbnail ? IMAGE_CONFIG.thumbWidth : IMAGE_CONFIG.maxWidth;
-  return {
-    webp: `${IMAGE_CONFIG.basePath}/img${index}.${IMAGE_CONFIG.format}?w=${width}&q=${IMAGE_CONFIG.quality}`,
-    jpg: `${IMAGE_CONFIG.basePath}/img${index}.${IMAGE_CONFIG.fallbackFormat}?w=${width}&q=${IMAGE_CONFIG.quality}`,
-  };
+  return `${IMAGE_CONFIG.basePath}/img${index}.${IMAGE_CONFIG.format}?w=${width}&q=${IMAGE_CONFIG.quality}`;
 };
 
 // 🎨 Skeleton loader component
@@ -37,7 +33,7 @@ const ImageGallery = () => {
   const masonryInstance = useRef(null);
   const observerRef = useRef(null);
 
-  // 🚀 Fast image detection with parallel fetching + timeout
+  // 🚀 Fast image detection with parallel fetching
   useEffect(() => {
     const MAX_IMAGES = 200;
     const TIMEOUT_MS = 3000;
@@ -45,13 +41,13 @@ const ImageGallery = () => {
     let completed = 0;
 
     const checkImage = async (index) => {
-      const { webp, jpg } = getOptimizedSrc(index, true);
+      const imageUrl = getOptimizedSrc(index, true);
       
       try {
         const controller = new AbortController();
         const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
         
-        const response = await fetch(webp, { 
+        const response = await fetch(imageUrl, { 
           method: 'HEAD',
           signal: controller.signal,
           cache: 'force-cache'
@@ -63,22 +59,7 @@ const ImageGallery = () => {
           foundImages.push(index);
         }
       } catch {
-        try {
-          const controller = new AbortController();
-          const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
-          
-          const response = await fetch(jpg, { 
-            method: 'HEAD',
-            signal: controller.signal,
-            cache: 'force-cache'
-          });
-          
-          clearTimeout(timeout);
-          
-          if (response.ok) foundImages.push(index);
-        } catch {
-          // Image doesn't exist, skip silently
-        }
+        // Image doesn't exist, skip silently
       } finally {
         completed++;
         if (completed === MAX_IMAGES) {
@@ -118,7 +99,7 @@ const ImageGallery = () => {
     return () => {};
   }, []);
 
-  // 🖼️ Intersection Observer for lazy loading + blur-up effect
+  // 🖼️ Intersection Observer for lazy loading
   useEffect(() => {
     if (imageIndices.length === 0) return;
 
@@ -131,22 +112,21 @@ const ImageGallery = () => {
             
             setLoadedImages(prev => ({ ...prev, [index]: 'loading' }));
             
-            const { webp, jpg } = getOptimizedSrc(index);
+            // Load high-res JPG
             const highResImg = new Image();
             
             highResImg.onload = () => {
-              img.src = webp;
+              img.src = getOptimizedSrc(index);
               img.classList.remove('blur-sm', 'scale-105');
               img.classList.add('transition-opacity', 'duration-300', 'opacity-100');
               setLoadedImages(prev => ({ ...prev, [index]: 'loaded' }));
             };
             
             highResImg.onerror = () => {
-              img.src = jpg;
-              setLoadedImages(prev => ({ ...prev, [index]: 'loaded' }));
+              setLoadedImages(prev => ({ ...prev, [index]: 'error' }));
             };
             
-            highResImg.src = webp;
+            highResImg.src = getOptimizedSrc(index);
             observerRef.current?.unobserve(img);
           }
         });
@@ -242,7 +222,7 @@ const ImageGallery = () => {
         
         {/* Gallery Items */}
         {imageIndices.map((index) => {
-          const { webp: thumbWebp, jpg: thumbJpg } = getOptimizedSrc(index, true);
+          const thumbSrc = getOptimizedSrc(index, true);
           const isLoaded = loadedImages[index] === 'loaded';
           
           return (
@@ -253,16 +233,15 @@ const ImageGallery = () => {
               {/* Image Container with Hover Effects */}
               <div className="relative w-full rounded-2xl overflow-hidden bg-gray-800/30 border border-gray-700/50 hover:border-amber-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-amber-500/10">
                 
-                {/* Skeleton Loader (shown while loading) */}
+                {/* Skeleton Loader */}
                 {!isLoaded && <ImageSkeleton />}
                 
                 {/* Actual Image with blur-up effect */}
                 <img
                   data-index={index}
-                  src={thumbJpg}
-                  data-src-webp={thumbWebp}
+                  src={thumbSrc}
                   alt={`Photography work ${index} by Dharamveer Kumar`}
-                  title={`img${index}`}
+                  title={`img${index}.jpg`}
                   loading="lazy"
                   decoding="async"
                   fetchPriority="low"
@@ -283,8 +262,8 @@ const ImageGallery = () => {
                 
                 {/* Download Button - FIXED BOTTOM-RIGHT POSITION */}
                 <a
-                  href={getOptimizedSrc(index).webp}
-                  download={`dharamveer-photo-${index}.${IMAGE_CONFIG.format}`}
+                  href={getOptimizedSrc(index)}
+                  download={`dharamveer-photo-${index}.jpg`}
                   className="absolute bottom-4 right-4 w-11 h-11 rounded-xl bg-black/70 backdrop-blur-md border border-gray-600 hover:border-amber-400 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-amber-500/20 hover:-translate-y-0.5 hover:scale-110 shadow-lg"
                   aria-label={`Download photography work ${index}`}
                   onClick={(e) => e.stopPropagation()}
@@ -292,7 +271,7 @@ const ImageGallery = () => {
                   <i className="fas fa-download text-gray-200 hover:text-amber-400 transition-colors text-base font-semibold"></i>
                 </a>
                 
-                {/* Optional: Image Number Badge - Bottom Left */}
+                {/* Image Number Badge - Bottom Left */}
                 <div className="absolute bottom-4 left-4 px-3 py-1.5 bg-black/60 backdrop-blur-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <span className="text-xs text-gray-300 font-medium">#{index}</span>
                 </div>
