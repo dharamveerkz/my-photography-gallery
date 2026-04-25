@@ -6,11 +6,11 @@ import imagesLoaded from "imagesloaded";
 // 🎯 Image optimization config
 const IMAGE_CONFIG = {
   basePath: "/uploads",
-  format: "webp", // Primary format (faster loading)
+  format: "webp",
   fallbackFormat: "jpg",
   quality: 85,
   maxWidth: 1200,
-  thumbWidth: 400, // For lazy-loaded previews
+  thumbWidth: 400,
 };
 
 // 🔄 Generate optimized image URL with fallback
@@ -40,7 +40,7 @@ const ImageGallery = () => {
   // 🚀 Fast image detection with parallel fetching + timeout
   useEffect(() => {
     const MAX_IMAGES = 200;
-    const TIMEOUT_MS = 3000; // 3s timeout per image
+    const TIMEOUT_MS = 3000;
     const foundImages = [];
     let completed = 0;
 
@@ -48,7 +48,6 @@ const ImageGallery = () => {
       const { webp, jpg } = getOptimizedSrc(index, true);
       
       try {
-        // Try WebP first (smaller, faster)
         const controller = new AbortController();
         const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
         
@@ -64,7 +63,6 @@ const ImageGallery = () => {
           foundImages.push(index);
         }
       } catch {
-        // Fallback: try JPG
         try {
           const controller = new AbortController();
           const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
@@ -89,7 +87,7 @@ const ImageGallery = () => {
       }
     };
 
-    // Parallel fetch with concurrency limit (prevent network congestion)
+    // Parallel fetch with concurrency limit
     const concurrencyLimit = 10;
     const queue = [...Array(MAX_IMAGES).keys()].map(i => i + 1);
     
@@ -102,7 +100,6 @@ const ImageGallery = () => {
         }
         if (workers.length > 0) {
           await Promise.race(workers);
-          // Remove completed promises
           for (let i = workers.length - 1; i >= 0; i--) {
             try {
               await Promise.resolve(workers[i]);
@@ -118,10 +115,7 @@ const ImageGallery = () => {
 
     processQueue();
 
-    return () => {
-      // Cleanup: abort any pending fetches
-      // (AbortController handles this automatically on unmount)
-    };
+    return () => {};
   }, []);
 
   // 🖼️ Intersection Observer for lazy loading + blur-up effect
@@ -135,36 +129,31 @@ const ImageGallery = () => {
             const img = entry.target;
             const index = img.dataset.index;
             
-            // Mark as loading
             setLoadedImages(prev => ({ ...prev, [index]: 'loading' }));
             
-            // Load high-res image
             const { webp, jpg } = getOptimizedSrc(index);
             const highResImg = new Image();
             
             highResImg.onload = () => {
-              img.src = webp; // Use WebP if supported
+              img.src = webp;
               img.classList.remove('blur-sm', 'scale-105');
               img.classList.add('transition-opacity', 'duration-300', 'opacity-100');
               setLoadedImages(prev => ({ ...prev, [index]: 'loaded' }));
             };
             
             highResImg.onerror = () => {
-              img.src = jpg; // Fallback to JPG
+              img.src = jpg;
               setLoadedImages(prev => ({ ...prev, [index]: 'loaded' }));
             };
             
             highResImg.src = webp;
-            
-            // Stop observing this image
             observerRef.current?.unobserve(img);
           }
         });
       },
-      { rootMargin: '100px', threshold: 0.01 } // Load when 100px from viewport
+      { rootMargin: '100px', threshold: 0.01 }
     );
 
-    // Observe all gallery images
     const images = galleryRef.current?.querySelectorAll('img[data-index]');
     images?.forEach(img => observerRef.current?.observe(img));
 
@@ -181,7 +170,7 @@ const ImageGallery = () => {
         itemSelector: ".masonry-item",
         columnWidth: ".grid-sizer",
         percentPosition: true,
-        gutter: 16, // 16px gap (Tailwind spacing)
+        gutter: 16,
         resize: true,
       });
 
@@ -195,7 +184,6 @@ const ImageGallery = () => {
       };
     };
 
-    // Wait for images to load before initializing masonry
     const cleanup = imagesLoaded(galleryElement, setupMasonry);
 
     return () => {
@@ -263,7 +251,7 @@ const ImageGallery = () => {
               className="masonry-item group relative break-inside-avoid mb-4"
             >
               {/* Image Container with Hover Effects */}
-              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-gray-800/30 border border-gray-700/50 hover:border-amber-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-amber-500/10">
+              <div className="relative w-full rounded-2xl overflow-hidden bg-gray-800/30 border border-gray-700/50 hover:border-amber-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-amber-500/10">
                 
                 {/* Skeleton Loader (shown while loading) */}
                 {!isLoaded && <ImageSkeleton />}
@@ -271,45 +259,43 @@ const ImageGallery = () => {
                 {/* Actual Image with blur-up effect */}
                 <img
                   data-index={index}
-                  src={thumbJpg} // Low-res placeholder (JPG for max compatibility)
+                  src={thumbJpg}
                   data-src-webp={thumbWebp}
                   alt={`Photography work ${index} by Dharamveer Kumar`}
                   title={`img${index}`}
                   loading="lazy"
                   decoding="async"
                   fetchPriority="low"
-                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ${
+                  className={`w-full h-auto object-cover transition-all duration-500 ${
                     isLoaded 
                       ? 'opacity-100 scale-100' 
                       : 'opacity-0 scale-105 blur-sm'
                   } group-hover:scale-105`}
                   onError={(e) => {
-                    // Hide broken images gracefully
                     e.target.style.display = 'none';
                     e.target.closest('.masonry-item')?.style.display = 'none';
-                    // Trigger masonry relayout
                     setTimeout(() => masonryInstance.current?.layout(), 100);
                   }}
                 />
                 
                 {/* Overlay on Hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                  <p className="text-white text-sm font-medium mb-2">View Full Size</p>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs text-gray-300">img{index}.{IMAGE_CONFIG.format}</span>
-                  </div>
-                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 
-                {/* Download Button */}
+                {/* Download Button - FIXED BOTTOM-RIGHT POSITION */}
                 <a
                   href={getOptimizedSrc(index).webp}
                   download={`dharamveer-photo-${index}.${IMAGE_CONFIG.format}`}
-                  className="absolute top-3 right-3 w-9 h-9 rounded-xl bg-black/60 backdrop-blur-sm border border-gray-600 hover:border-amber-400 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 hover:bg-amber-500/20 hover:-translate-y-0.5"
+                  className="absolute bottom-4 right-4 w-11 h-11 rounded-xl bg-black/70 backdrop-blur-md border border-gray-600 hover:border-amber-400 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-amber-500/20 hover:-translate-y-0.5 hover:scale-110 shadow-lg"
                   aria-label={`Download photography work ${index}`}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <i className="fas fa-download text-gray-300 hover:text-amber-400 transition-colors text-sm"></i>
+                  <i className="fas fa-download text-gray-200 hover:text-amber-400 transition-colors text-base font-semibold"></i>
                 </a>
+                
+                {/* Optional: Image Number Badge - Bottom Left */}
+                <div className="absolute bottom-4 left-4 px-3 py-1.5 bg-black/60 backdrop-blur-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="text-xs text-gray-300 font-medium">#{index}</span>
+                </div>
               </div>
             </article>
           );
@@ -330,12 +316,12 @@ const ImageGallery = () => {
         <i className="fas fa-arrow-up text-lg font-bold"></i>
       </button>
 
-      {/* ✨ Optional: Scroll Progress Indicator */}
+      {/* ✨ Scroll Progress Indicator */}
       <div className="fixed top-0 left-0 right-0 h-0.5 bg-gray-800 z-50">
         <div 
           className="h-full bg-gradient-to-r from-amber-400 to-amber-600 transition-all duration-100"
           style={{ 
-            width: `${Math.min((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100, 100)}%` 
+            width: `${Math.min((typeof window !== 'undefined' ? window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100 : 0), 100)}%` 
           }}
         />
       </div>
