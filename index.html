@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- 🔍 SEO Meta Tags -->
+    <!-- 🔍 SEO -->
     <title>Dharamveer Kumar | Photographer & Creative Developer</title>
     <meta name="description" content="Professional photography, graphic design & creative development by Dharamveer Kumar. Based in Patna, Bihar." />
     <meta name="keywords" content="photography, graphic design, portfolio, Dharamveer Kumar, Patna, Bihar" />
@@ -12,7 +12,7 @@
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://dharamveerkz.github.io/" />
 
-    <!-- 🖼️ Open Graph / Social Sharing -->
+    <!-- 🖼️ Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://dharamveerkz.github.io/" />
     <meta property="og:title" content="Dharamveer Kumar | Photographer & Creative Developer" />
@@ -20,7 +20,7 @@
     <meta property="og:image" content="/og-image.jpg" />
     <meta property="og:site_name" content="Dharamveer Portfolio" />
 
-    <!-- 🐦 Twitter Card -->
+    <!-- 🐦 Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://dharamveerkz.github.io/" />
     <meta property="twitter:title" content="Dharamveer Kumar | Photographer & Creative Developer" />
@@ -34,51 +34,31 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-    <!-- 🔗 Preconnect for Performance -->
+    <!-- 🔗 Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
 
-    <!-- 🖼️ Favicon -->
+    <!-- 🖼️ Favicon (from public/) -->
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- 🎨 Google Fonts: Inter -->
+    <!-- 🎨 Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- 🎨 Font Awesome 6 (Icons) -->
+    <!-- 🎨 Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- 🎨 Custom CSS (Non-Tailwind utilities) -->
+    <!-- 🎨 Custom CSS (non-Tailwind) -->
     <style>
-      /* Smooth scroll */
       html { scroll-behavior: smooth; }
-
-      /* Font smoothing */
-      * {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-
-      /* Selection color */
-      ::selection {
-        background: rgba(245, 158, 11, 0.3);
-        color: inherit;
-      }
-
-      /* Hide scrollbar utility */
+      * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+      ::selection { background: rgba(245, 158, 11, 0.3); color: inherit; }
       .no-scrollbar::-webkit-scrollbar { display: none; }
       .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-      /* Focus visible for accessibility */
-      :focus-visible {
-        outline: 2px solid #fbbf24;
-        outline-offset: 2px;
-      }
-
-      /* Reduce motion for accessibility */
+      :focus-visible { outline: 2px solid #fbbf24; outline-offset: 2px; }
       @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after {
           animation-duration: 0.01ms !important;
@@ -86,28 +66,24 @@
           scroll-behavior: auto !important;
         }
       }
-
-      /* Page load fade-in */
       #root { animation: fadeIn 0.4s ease-out; }
       @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 
-    <!-- 🔐 Security Headers -->
+    <!-- 🔐 Security -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="X-Frame-Options" content="DENY" />
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
   </head>
 
   <body class="bg-white text-gray-900 antialiased">
-    <!-- Skip to content (Accessibility) -->
     <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-amber-500 focus:text-black focus:rounded-lg focus:font-medium">
       Skip to content
     </a>
 
-    <!-- React App Root -->
     <div id="root"></div>
 
-    <!-- Vite Entry Point -->
+    <!-- ✅ Vite entry (in root, references src/) -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
