@@ -1,43 +1,221 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dharamveer</title>
-
-    <!-- Tailwind CSS CDN -->
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          amber: {
-            400: '#fbbf24',
-            500: '#f59e0b',
-            600: '#d97706',
-          }
+    
+    <!-- 🔍 Primary Meta Tags -->
+    <title>Dharamveer Kumar | Photographer & Creative Developer</title>
+    <meta name="title" content="Dharamveer Kumar | Photographer & Creative Developer" />
+    <meta name="description" content="Professional photography, graphic design & creative development by Dharamveer Kumar. Based in Patna, Bihar. Capturing moments, crafting stories." />
+    <meta name="keywords" content="photography, graphic design, portfolio, Dharamveer Kumar, Patna, Bihar, social media, content creation, UI/UX" />
+    <meta name="author" content="Dharamveer Kumar" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- 🔗 Canonical URL -->
+    <link rel="canonical" href="https://dharamveerkz.github.io/" />
+    
+    <!-- 🖼️ Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://dharamveerkz.github.io/" />
+    <meta property="og:title" content="Dharamveer Kumar | Photographer & Creative Developer" />
+    <meta property="og:description" content="Professional photography, graphic design & creative development. Based in Patna, Bihar." />
+    <meta property="og:image" content="https://dharamveerkz.github.io/og-image.jpg" />
+    <meta property="og:site_name" content="Dharamveer Portfolio" />
+    
+    <!-- 🐦 Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://dharamveerkz.github.io/" />
+    <meta property="twitter:title" content="Dharamveer Kumar | Photographer & Creative Developer" />
+    <meta property="twitter:description" content="Professional photography, graphic design & creative development. Based in Patna, Bihar." />
+    <meta property="twitter:image" content="https://dharamveerkz.github.io/og-image.jpg" />
+    <meta property="twitter:creator" content="@dharamveerkz" />
+    
+    <!-- 🎨 Theme & Appearance -->
+    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="color-scheme" content="dark light" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    
+    <!-- 🔗 Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" />
+    
+    <!-- 🖼️ Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    
+    <!-- 🎨 Tailwind CSS CDN + Config -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              amber: {
+                300: '#fcd34d',
+                400: '#fbbf24',
+                500: '#f59e0b',
+                600: '#d97706',
+                700: '#b45309',
+              },
+              // Photography-friendly dark palette
+              photo: {
+                900: '#0a0a0a',
+                800: '#171717',
+                700: '#262626',
+              }
+            },
+            fontFamily: {
+              sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+            },
+            animation: {
+              'fade-in': 'fadeIn 0.5s ease-out forwards',
+              'slide-up': 'slideUp 0.6s ease-out forwards',
+              'float': 'float 3s ease-in-out infinite',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              slideUp: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' },
+              }
+            },
+            backdropBlur: {
+              xs: '2px',
+            },
+            transitionTimingFunction: {
+              'in-expo': 'cubic-bezier(0.95, 0.05, 0.795, 0.035)',
+              'out-expo': 'cubic-bezier(0.19, 1, 0.22, 1)',
+            }
+          },
         },
-        fontFamily: {
-          sans: ['Inter', 'system-ui', 'sans-serif']
+      }
+    </script>
+    
+    <!-- 🎨 Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- 🎨 Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- 🎨 Base Styles & Utilities -->
+    <style>
+      /* Smooth scroll behavior */
+      html { scroll-behavior: smooth; }
+      
+      /* Base font & antialiasing */
+      * {
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      
+      /* Selection styling */
+      ::selection {
+        background: rgba(245, 158, 11, 0.3);
+        color: inherit;
+      }
+      
+      /* Image loading optimization */
+      img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+      }
+      
+      /* Hide scrollbar for Chrome/Safari/Opera but allow scroll */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      
+      /* Focus visible for accessibility */
+      :focus-visible {
+        outline: 2px solid #fbbf24;
+        outline-offset: 2px;
+      }
+      
+      /* Reduce motion for accessibility */
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
         }
       }
-    }
-  }
-</script>
-
-<!-- Font Awesome + Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-<!-- Smooth Scroll -->
-<style>
-  html { scroll-behavior: smooth; }
-  * { font-family: 'Inter', system-ui, sans-serif; }
-</style>
+      
+      /* Glass morphism utility */
+      .glass {
+        background: rgba(23, 23, 23, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      /* Gradient text utility */
+      .text-gradient {
+        background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      
+      /* Subtle entrance animation for page load */
+      #root {
+        animation: fadeIn 0.4s ease-out;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+    </style>
+    
+    <!-- 🔐 Security Headers (via meta) -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
   </head>
-  <body>
+  
+  <body class="bg-photo-900 text-gray-100 antialiased">
+    <!-- Skip to content for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-amber-500 focus:text-black focus:rounded-lg focus:font-medium">
+      Skip to content
+    </a>
+    
+    <!-- Root App -->
     <div id="root"></div>
+    
+    <!-- Vite Entry -->
     <script type="module" src="/src/main.jsx"></script>
+    
+    <!-- 🎨 Optional: Analytics (Uncomment & configure) -->
+    <!-- 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    -->
   </body>
 </html>
