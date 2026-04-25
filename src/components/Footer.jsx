@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-  // Social links with inline SVGs (zero external dependencies)
   const socialLinks = [
     {
       name: "Facebook",
@@ -53,7 +52,6 @@ const Footer = () => {
     }
   ];
 
-  // Footer link columns
   const columns = [
     {
       title: "Explore",
@@ -82,31 +80,35 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gradient-to-b from-gray-900 to-black text-gray-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+    <footer className="bg-gray-950 text-gray-300 border-t border-gray-800">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
         
         {/* Top Section: Brand + Social */}
-        <div className="flex flex-col lg:flex-row justify-between items-start gap-8 mb-12">
-          <div className="space-y-4 max-w-md">
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-10 mb-12">
+          
+          {/* Brand Area */}
+          <div className="space-y-5 max-w-md">
             <Link 
               to="/" 
-              className="inline-block text-3xl font-bold bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent hover:opacity-90 transition-opacity"
+              className="inline-block text-3xl font-bold bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent"
             >
               Dharamveer
             </Link>
-            <p className="text-gray-400 text-sm leading-relaxed">
+            {/* Improved Line Height and Color for readability */}
+            <p className="text-gray-400 text-base leading-relaxed font-light">
               Capturing moments, crafting stories. Professional photography & creative design services for brands and individuals.
             </p>
-            {/* Social Icons */}
-            <div className="flex gap-3 pt-2">
+            
+            {/* Social Icons - Lighter background, brighter icons */}
+            <div className="flex gap-4 pt-2">
               {socialLinks.map((social) => (
                 <a
                   key={social.name}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`Visit Dharamveer's ${social.name}`}
-                  className="w-10 h-10 rounded-full bg-gray-800 hover:bg-amber-500/20 flex items-center justify-center text-gray-400 hover:text-amber-400 transition-all duration-300"
+                  aria-label={social.name}
+                  className="w-10 h-10 rounded-full bg-gray-800 hover:bg-orange-500 flex items-center justify-center text-gray-300 hover:text-white transition-all duration-300 shadow-lg"
                 >
                   {social.icon}
                 </a>
@@ -114,20 +116,21 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Link Columns */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 w-full lg:w-auto">
+          {/* Link Columns - More spacing and better font size */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 w-full">
             {columns.map((col) => (
               <div key={col.title} className="space-y-4">
-                <h3 className="text-sm font-semibold text-white uppercase tracking-wider">
+                {/* Uppercase tracking for headers looks more premium */}
+                <h3 className="text-sm font-bold text-white uppercase tracking-widest mb-3">
                   {col.title}
                 </h3>
-                <ul className="space-y-2.5">
+                <ul className="space-y-3">
                   {col.links.map((link) => (
                     <li key={link.label}>
                       {link.to ? (
                         <Link 
                           to={link.to}
-                          className="text-gray-400 hover:text-amber-400 text-sm transition-colors duration-200"
+                          className="text-gray-400 hover:text-orange-400 text-base font-medium transition-colors duration-200 block"
                         >
                           {link.label}
                         </Link>
@@ -136,7 +139,7 @@ const Footer = () => {
                           href={link.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-gray-400 hover:text-amber-400 text-sm transition-colors duration-200"
+                          className="text-gray-400 hover:text-orange-400 text-base font-medium transition-colors duration-200 block"
                         >
                           {link.label}
                         </a>
@@ -149,23 +152,22 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Newsletter / Subscribe */}
-        <div className="border-t border-gray-800 pt-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        {/* Newsletter / Subscribe - Cleaner Input */}
+        <div className="border-t border-gray-800 pt-10">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
-              <h4 className="text-white font-medium">Subscribe to my lens</h4>
-              <p className="text-sm text-gray-500">Get exclusive photography tips & updates</p>
+              <h4 className="text-white font-semibold text-lg">Subscribe to my lens</h4>
+              <p className="text-gray-500 text-sm">Get exclusive photography tips & updates.</p>
             </div>
-            <form className="flex flex-col sm:flex-row gap-3 max-w-md w-full">
+            <form className="flex flex-col sm:flex-row gap-3 w-full max-w-md">
               <input
                 type="email"
                 placeholder="your@email.com"
-                aria-label="Email address"
-                className="flex-1 px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-all text-sm"
+                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all text-base"
               />
               <button
                 type="submit"
-                className="px-6 py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-black font-medium rounded-lg transition-all duration-300 shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 text-sm whitespace-nowrap"
+                className="px-8 py-3 bg-orange-500 hover:bg-orange-600 text-black font-bold rounded-lg transition-all duration-300 shadow-md shadow-orange-500/20 whitespace-nowrap text-base"
               >
                 Subscribe
               </button>
@@ -175,21 +177,21 @@ const Footer = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-gray-800 bg-black/40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-3 text-sm">
+      <div className="border-t border-gray-800 bg-gray-950">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-6">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm">
             <p className="text-gray-500">
               © {currentYear}{" "}
-              <Link to="/" className="text-amber-400 hover:text-amber-300 transition-colors">
+              <Link to="/" className="text-orange-500 hover:text-orange-400 font-medium transition-colors">
                 Dharamveer
               </Link>
               . All rights reserved.
             </p>
             <div className="flex gap-6">
-              <Link to="/privacy" className="text-gray-500 hover:text-amber-400 transition-colors">
+              <Link to="/privacy" className="text-gray-500 hover:text-orange-400 transition-colors">
                 Privacy Policy
               </Link>
-              <Link to="/terms" className="text-gray-500 hover:text-amber-400 transition-colors">
+              <Link to="/terms" className="text-gray-500 hover:text-orange-400 transition-colors">
                 Terms & Conditions
               </Link>
             </div>
