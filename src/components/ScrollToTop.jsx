@@ -1,4 +1,3 @@
-// src/components/ScrollToTop.jsx
 import React, { useState, useEffect, useCallback } from "react";
 
 const ScrollToTop = () => {
@@ -10,9 +9,7 @@ const ScrollToTop = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const scrollToTop = useCallback(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
+  const scrollToTop = useCallback(() => window.scrollTo({ top: 0, behavior: "smooth" }), []);
 
   return (
     <button
