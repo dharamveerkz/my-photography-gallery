@@ -1,89 +1,71 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- 🔍 SEO -->
-    <title>Dharamveer Kumar | Photographer & Creative Developer</title>
-    <meta name="description" content="Professional photography, graphic design & creative development by Dharamveer Kumar. Based in Patna, Bihar." />
-    <meta name="keywords" content="photography, graphic design, portfolio, Dharamveer Kumar, Patna, Bihar" />
+    
+    <!-- 🔍 SEO Meta Tags -->
+    <title>Dharamveer Kumar | Photography Portfolio</title>
+    <meta name="title" content="Dharamveer Kumar | Photography Portfolio" />
+    <meta name="description" content="Professional photography by Dharamveer Kumar. Based in Patna, Bihar. Capturing moments, crafting stories through visual artistry." />
+    <meta name="keywords" content="photography, portfolio, Dharamveer Kumar, Patna, Bihar, photographer, visual storytelling" />
     <meta name="author" content="Dharamveer Kumar" />
     <meta name="robots" content="index, follow" />
+    
+    <!-- 🔗 Canonical URL -->
     <link rel="canonical" href="https://dharamveerkz.github.io/" />
-
-    <!-- 🖼️ Open Graph -->
+    
+    <!-- 🖼️ Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://dharamveerkz.github.io/" />
-    <meta property="og:title" content="Dharamveer Kumar | Photographer & Creative Developer" />
-    <meta property="og:description" content="Professional photography, graphic design & creative development. Based in Patna, Bihar." />
-    <meta property="og:image" content="/og-image.jpg" />
+    <meta property="og:title" content="Dharamveer Kumar | Photography Portfolio" />
+    <meta property="og:description" content="Professional photography by Dharamveer Kumar. Based in Patna, Bihar." />
+    <meta property="og:image" content="https://dharamveerkz.github.io/og-image.jpg" />
     <meta property="og:site_name" content="Dharamveer Portfolio" />
-
-    <!-- 🐦 Twitter -->
+    
+    <!-- 🐦 Twitter Card -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://dharamveerkz.github.io/" />
-    <meta property="twitter:title" content="Dharamveer Kumar | Photographer & Creative Developer" />
-    <meta property="twitter:description" content="Professional photography, graphic design & creative development. Based in Patna, Bihar." />
-    <meta property="twitter:image" content="/og-image.jpg" />
+    <meta property="twitter:title" content="Dharamveer Kumar | Photography Portfolio" />
+    <meta property="twitter:description" content="Professional photography by Dharamveer Kumar. Based in Patna, Bihar." />
+    <meta property="twitter:image" content="https://dharamveerkz.github.io/og-image.jpg" />
     <meta property="twitter:creator" content="@dharamveerkz" />
-
-    <!-- 🎨 Theme & PWA -->
-    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    
+    <!-- 🎨 Theme & Appearance -->
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="color-scheme" content="light" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-
-    <!-- 🔗 Preconnect -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    
+    <!-- 🔗 Preconnect for Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
-
-    <!-- 🖼️ Favicon (from public/) -->
+    
+    <!-- 🖼️ Favicon Suite -->
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-
-    <!-- 🎨 Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- 🎨 Font Awesome -->
+    
+    <!-- 🎨 Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- 🎨 Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <!-- 🎨 Custom CSS (non-Tailwind) -->
-    <style>
-      html { scroll-behavior: smooth; }
-      * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-      ::selection { background: rgba(245, 158, 11, 0.3); color: inherit; }
-      .no-scrollbar::-webkit-scrollbar { display: none; }
-      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-      :focus-visible { outline: 2px solid #fbbf24; outline-offset: 2px; }
-      @media (prefers-reduced-motion: reduce) {
-        *, *::before, *::after {
-          animation-duration: 0.01ms !important;
-          transition-duration: 0.01ms !important;
-          scroll-behavior: auto !important;
-        }
-      }
-      #root { animation: fadeIn 0.4s ease-out; }
-      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    </style>
-
-    <!-- 🔐 Security -->
-    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-    <meta http-equiv="X-Frame-Options" content="DENY" />
-    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
   </head>
-
-  <body class="bg-white text-gray-900 antialiased">
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-amber-500 focus:text-black focus:rounded-lg focus:font-medium">
+  
+  <body>
+    <!-- Skip to content for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-amber-500 focus:text-white focus:rounded-lg focus:font-medium">
       Skip to content
     </a>
-
+    
+    <!-- Root App -->
     <div id="root"></div>
-
-    <!-- ✅ Vite entry (in root, references src/) -->
+    
+    <!-- Vite Entry -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
