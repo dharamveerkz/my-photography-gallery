@@ -1,4 +1,3 @@
-// src/components/Navbar.jsx
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -29,13 +28,10 @@ const Navbar = () => {
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          
-          {/* Logo */}
           <Link to="/" className="text-xl font-semibold text-gray-900 hover:text-amber-600 transition-colors">
             Dharamveer
           </Link>
 
-          {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
@@ -52,7 +48,6 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileOpen(!isMobileOpen)}
             className="md:hidden p-2 text-gray-600 hover:text-gray-900"
@@ -62,7 +57,6 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Menu */}
         <div className={`md:hidden absolute top-full left-0 right-0 bg-white border-t border-gray-100 transition-all duration-200 overflow-hidden ${
           isMobileOpen ? "max-h-48 opacity-100" : "max-h-0 opacity-0"
         }`}>
