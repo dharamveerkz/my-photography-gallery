@@ -34,24 +34,53 @@ const About = () => {
             </div>
           </div>
 
-          {/* Journey Timeline */}
-          <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 mb-8">
-            <h3 className="text-lg font-semibold text-gray-900 mb-5">My Journey</h3>
-            <div className="space-y-6">
-              <div className="relative pl-6 border-l-2 border-amber-200">
-                <span className="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-amber-500"></span>
-                <h4 className="font-medium text-gray-900">Head Coordinator</h4>
-                <p className="text-sm text-amber-600 mb-1">Designing & Photography Clubs • 2022 – Present</p>
-                <p className="text-sm text-gray-600">Led creative teams, managed event branding, and mentored junior members in visual storytelling.</p>
-              </div>
-              <div className="relative pl-6 border-l-2 border-amber-200">
-                <span className="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-amber-500"></span>
-                <h4 className="font-medium text-gray-900">Social Media Manager</h4>
-                <p className="text-sm text-amber-600 mb-1">Freelance & Campus Brands • 2021 – Present</p>
-                <p className="text-sm text-gray-600">Created 100+ high-engagement posts, grew follower base by 40%, and developed content strategies.</p>
-              </div>
-            </div>
-          </div>
+          {/* Journey Timeline */}  
+<div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 mb-8">  
+  <h3 className="text-lg font-semibold text-gray-900 mb-5">My Journey</h3>  
+  <div className="space-y-6">  
+
+    <div className="relative pl-6 border-l-2 border-amber-200">  
+      <span className="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-amber-500"></span>  
+      <h4 className="font-medium text-gray-900">The Beginning</h4>  
+      <p className="text-sm text-amber-600 mb-1">School Days</p>  
+      <p className="text-sm text-gray-600">
+        My journey began with simple clicks driven by curiosity.  
+        Those moments slowly shaped my interest in storytelling and perspective.
+      </p>  
+    </div>  
+
+    <div className="relative pl-6 border-l-2 border-amber-200">  
+      <span className="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-amber-500"></span>  
+      <h4 className="font-medium text-gray-900">Visual Storytelling</h4>  
+      <p className="text-sm text-amber-600 mb-1">Early Exploration</p>  
+      <p className="text-sm text-gray-600">
+        I started creating short, documentary-style videos.  
+        Turning everyday moments into meaningful visual narratives became my focus.
+      </p>  
+    </div>  
+
+    <div className="relative pl-6 border-l-2 border-amber-200">  
+      <span className="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-amber-500"></span>  
+      <h4 className="font-medium text-gray-900">College & Community</h4>  
+      <p className="text-sm text-amber-600 mb-1">Events & Photography Circles</p>  
+      <p className="text-sm text-gray-600">
+        Worked in college events and collaborated with photography communities.  
+        Shared travel frames on Instagram to document stories and connect visually.
+      </p>  
+    </div>  
+
+    <div className="relative pl-6 border-l-2 border-amber-200">  
+      <span className="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-amber-500"></span>  
+      <h4 className="font-medium text-gray-900">Reach & Recognition</h4>  
+      <p className="text-sm text-amber-600 mb-1">Digital Contributions</p>  
+      <p className="text-sm text-gray-600">
+        Contributed to district pages to showcase our state.  
+        Featured via Pexels and reached 23M+ views through Google contributions.
+      </p>  
+    </div>  
+
+  </div>  
+</div>
 
           {/* Skills */}
           <div>
