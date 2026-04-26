@@ -84,9 +84,9 @@ const About = () => {
 
           {/* Skills */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Expertise</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Love to do</h3>
             <div className="flex flex-wrap gap-2">
-              {["Photography", "Graphic Design", "UI/UX", "Social Media", "Video Editing", "Brand Strategy", "Content Creation"].map((skill) => (
+              {["Photography", "Travelling", "Capturing Paths", "Social Media", "Video Editing", "Story Telling", "Content Creation"].map((skill) => (
                 <span key={skill} className="px-3 py-1.5 bg-gray-100 border border-gray-200 text-gray-700 text-sm rounded-lg hover:border-amber-300 hover:text-amber-700 transition-colors cursor-default">
                   {skill}
                 </span>
