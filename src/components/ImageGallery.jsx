@@ -1,6 +1,5 @@
 // src/components/ImageGallery.jsx
 import React, { useState, useEffect, useCallback, useRef } from "react";
-// ✅ Correct paths: hooks/ and utils/ are at project root (outside src/)
 import { useIntersection } from "../../hooks/useIntersection";
 import { generateImage, getAllImageIds, IMAGE_CONFIG } from "../../utils/imageConfig";
 import ImageCard from "./ImageCard";
@@ -15,7 +14,7 @@ const ImageGallery = () => {
   });
   
   const loadMoreRef = useRef(null);
-  const allIds = getAllImageIds(); // ✅ From utils/imageConfig.js
+  const allIds = getAllImageIds();
 
   // Load initial batch
   useEffect(() => {
