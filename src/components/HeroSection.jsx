@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
-    <section className="relative pt-28 pb-16 sm:pt-32 sm:pb-20 bg-gradient-to-b from-white to-gray-50">
+    <section className="relative pt-28 pb-16 sm:pt-32 sm:pb-10 bg-gradient-to-b from-white to-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <span className="inline-block px-4 py-1.5 bg-amber-50 border border-amber-200 rounded-full text-amber-700 text-xs font-medium mb-6">
           Photography Portfolio
