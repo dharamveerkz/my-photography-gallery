@@ -23,11 +23,10 @@ const About = () => {
             <div className="space-y-4">
               <h2 className="text-xl font-semibold text-gray-900">Hi, I'm Dharamveer Kumar</h2>
               <p className="text-gray-600 leading-relaxed">
-                A B.Tech CSE student at Bakhtiyarpur College of Engineering, Patna, and a passionate digital creative.
-                I specialize in photography, graphic design, social media management, and content creation — crafting visuals that connect brands with their audiences.
+                A traveler at heart and a storyteller through frames. I find inspiration in places, people, and the unnoticed details of everyday life.
               </p>
               <p className="text-gray-600 leading-relaxed">
-                I believe design that connects can turn ideas into powerful, memorable identities.
+                For me, photography goes beyond capturing moments; it’s about observing deeply and turning emotions into visual stories. Every journey becomes a canvas, and every frame reflects a piece of art shaped by perspective and feeling.
               </p>
               <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-white font-medium rounded-xl transition-all shadow-sm">
                 <i className="fas fa-file-pdf"></i> View Resume
