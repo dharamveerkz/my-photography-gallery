@@ -42,24 +42,18 @@ const ImageGallery = () => {
 
     const checkImage = async (index) => {
       const imageUrl = getOptimizedSrc(index, true);
-      
       try {
         const controller = new AbortController();
         const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
-        
         const response = await fetch(imageUrl, { 
           method: 'HEAD',
           signal: controller.signal,
           cache: 'force-cache'
         });
-        
         clearTimeout(timeout);
-        
-        if (response.ok) {
-          foundImages.push(index);
-        }
+        if (response.ok) foundImages.push(index);
       } catch {
-        // Image doesn't exist, skip silently
+        // Skip silently if image not found
       } finally {
         completed++;
         if (completed === MAX_IMAGES) {
@@ -71,7 +65,7 @@ const ImageGallery = () => {
     // Parallel fetch with concurrency limit
     const concurrencyLimit = 10;
     const queue = [...Array(MAX_IMAGES).keys()].map(i => i + 1);
-    
+
     const processQueue = async () => {
       const workers = [];
       while (queue.length > 0) {
@@ -82,12 +76,8 @@ const ImageGallery = () => {
         if (workers.length > 0) {
           await Promise.race(workers);
           for (let i = workers.length - 1; i >= 0; i--) {
-            try {
-              await Promise.resolve(workers[i]);
-              workers.splice(i, 1);
-            } catch {
-              workers.splice(i, 1);
-            }
+            try { await Promise.resolve(workers[i]); } catch {}
+            workers.splice(i, 1);
           }
         }
       }
@@ -95,8 +85,6 @@ const ImageGallery = () => {
     };
 
     processQueue();
-
-    return () => {};
   }, []);
 
   // 🖼️ Intersection Observer for lazy loading
@@ -109,23 +97,18 @@ const ImageGallery = () => {
           if (entry.isIntersecting) {
             const img = entry.target;
             const index = img.dataset.index;
-            
             setLoadedImages(prev => ({ ...prev, [index]: 'loading' }));
-            
-            // Load high-res JPG
+
             const highResImg = new Image();
-            
             highResImg.onload = () => {
               img.src = getOptimizedSrc(index);
               img.classList.remove('blur-sm', 'scale-105');
               img.classList.add('transition-opacity', 'duration-300', 'opacity-100');
               setLoadedImages(prev => ({ ...prev, [index]: 'loaded' }));
             };
-            
             highResImg.onerror = () => {
               setLoadedImages(prev => ({ ...prev, [index]: 'error' }));
             };
-            
             highResImg.src = getOptimizedSrc(index);
             observerRef.current?.unobserve(img);
           }
@@ -153,11 +136,9 @@ const ImageGallery = () => {
         gutter: 16,
         resize: true,
       });
-
       const handleResize = () => masonryInstance.current?.layout();
       window.addEventListener("resize", handleResize);
       masonryInstance.current.layout();
-
       return () => {
         window.removeEventListener("resize", handleResize);
         masonryInstance.current?.destroy();
@@ -165,29 +146,22 @@ const ImageGallery = () => {
     };
 
     const cleanup = imagesLoaded(galleryElement, setupMasonry);
-
     return () => {
       cleanup?.();
       masonryInstance.current?.destroy();
     };
   }, [imageIndices]);
 
-  // 📜 Scroll-to-top visibility logic
+  // 📜 Scroll-to-top visibility
   useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 400);
-    };
-    
+    const handleScroll = () => setShowScrollTop(window.scrollY > 400);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // 🎯 Smooth scroll to top
   const scrollToTop = useCallback(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
   // ⌨️ Keyboard support for scroll button
@@ -197,6 +171,21 @@ const ImageGallery = () => {
       scrollToTop();
     }
   }, [scrollToTop]);
+
+  // ❌ FIXED: Safe error handler (no optional chaining assignment)
+  const handleImageError = useCallback((e, index) => {
+    try {
+      e.target.style.display = 'none';
+      const masonryItem = e.target.closest('.masonry-item');
+      if (masonryItem) {
+        masonryItem.style.display = 'none';
+      }
+      setTimeout(() => masonryInstance.current?.layout(), 100);
+      setLoadedImages(prev => ({ ...prev, [index]: 'error' }));
+    } catch (err) {
+      console.error('Image error handler failed:', err);
+    }
+  }, []);
 
   if (imageIndices.length === 0) {
     return (
@@ -217,26 +206,24 @@ const ImageGallery = () => {
         className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
         aria-label="Photography portfolio gallery"
       >
-        {/* Grid sizer for Masonry */}
         <div className="grid-sizer"></div>
-        
-        {/* Gallery Items */}
+
         {imageIndices.map((index) => {
           const thumbSrc = getOptimizedSrc(index, true);
           const isLoaded = loadedImages[index] === 'loaded';
-          
+
           return (
             <article 
               key={index} 
               className="masonry-item group relative break-inside-avoid mb-4"
             >
-              {/* Image Container with Hover Effects */}
+              {/* Image Card */}
               <div className="relative w-full rounded-2xl overflow-hidden bg-gray-800/30 border border-gray-700/50 hover:border-amber-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-amber-500/10">
-                
+
                 {/* Skeleton Loader */}
                 {!isLoaded && <ImageSkeleton />}
-                
-                {/* Actual Image with blur-up effect */}
+
+                {/* Main Image */}
                 <img
                   data-index={index}
                   src={thumbSrc}
@@ -246,35 +233,31 @@ const ImageGallery = () => {
                   decoding="async"
                   fetchPriority="low"
                   className={`w-full h-auto object-cover transition-all duration-500 ${
-                    isLoaded 
-                      ? 'opacity-100 scale-100' 
-                      : 'opacity-0 scale-105 blur-sm'
+                    isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-105 blur-sm'
                   } group-hover:scale-105`}
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                    e.target.closest('.masonry-item')?.style.display = 'none';
-                    setTimeout(() => masonryInstance.current?.layout(), 100);
-                  }}
+                  onError={(e) => handleImageError(e, index)}
                 />
-                
-                {/* Overlay on Hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                
-                {/* Download Button - FIXED BOTTOM-RIGHT POSITION */}
+
+                {/* Hover Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+                {/* ✨ Download Button - Transparent, Bottom-Right, Hover/Focus */}
                 <a
                   href={getOptimizedSrc(index)}
                   download={`dharamveer-photo-${index}.jpg`}
-                  className="absolute bottom-4 right-4 w-11 h-11 rounded-xl bg-black/70 backdrop-blur-md border border-gray-600 hover:border-amber-400 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-amber-500/20 hover:-translate-y-0.5 hover:scale-110 shadow-lg"
-                  aria-label={`Download photography work ${index}`}
+                  aria-label={`Download photo ${index}`}
+                  className="absolute bottom-3 right-3 w-9 h-9 rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-sm border border-white/10 hover:border-amber-400/50 flex items-center justify-center opacity-0 group-hover:opacity-100 focus:opacity-100 transition-all duration-200 hover:scale-110 focus:scale-110 focus:outline-none focus:ring-2 focus:ring-amber-400/50 shadow-lg"
                   onClick={(e) => e.stopPropagation()}
+                  tabIndex={0}
                 >
-                  <i className="fas fa-download text-gray-200 hover:text-amber-400 transition-colors text-base font-semibold"></i>
+                  <i className="fas fa-download text-white/90 hover:text-amber-400 transition-colors text-sm" />
                 </a>
-                
-                {/* Image Number Badge - Bottom Left */}
-                <div className="absolute bottom-4 left-4 px-3 py-1.5 bg-black/60 backdrop-blur-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="text-xs text-gray-300 font-medium">#{index}</span>
+
+                {/* Image Number Badge - Subtle */}
+                <div className="absolute bottom-3 left-3 px-2.5 py-1 bg-black/40 backdrop-blur-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                  <span className="text-[10px] text-white/80 font-medium">#{index}</span>
                 </div>
+
               </div>
             </article>
           );
@@ -300,7 +283,7 @@ const ImageGallery = () => {
         <div 
           className="h-full bg-gradient-to-r from-amber-400 to-amber-600 transition-all duration-100"
           style={{ 
-            width: `${Math.min((typeof window !== 'undefined' ? window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100 : 0), 100)}%` 
+            width: `${typeof window !== 'undefined' ? Math.min((window.scrollY / Math.max(document.documentElement.scrollHeight - window.innerHeight, 1)) * 100, 100) : 0}%` 
           }}
         />
       </div>
