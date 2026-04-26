@@ -18,16 +18,6 @@ const HeroSection = () => {
           Hi, I'm Dharamveer — a photographer and creative developer based in Patna. 
           Welcome to my visual journal.
         </p>
-
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link to="#gallery" className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-medium rounded-xl transition-all shadow-sm hover:shadow-md">
-            View Gallery
-            <i className="fas fa-arrow-down text-sm"></i>
-          </Link>
-          <Link to="/contact" className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-gray-50 border border-gray-200 text-gray-700 font-medium rounded-xl transition-all">
-            Get in Touch
-          </Link>
-        </div>
       </div>
     </section>
   );
