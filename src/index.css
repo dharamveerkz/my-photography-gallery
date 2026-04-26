@@ -19,11 +19,6 @@ html {
   }
 }
 
-/* Smooth Scroll */
-html {
-  scroll-behavior: smooth;
-}
-
 /* Selection Color */
 ::selection {
   @apply bg-amber-500/30;
