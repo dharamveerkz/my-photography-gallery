@@ -1,40 +1,13 @@
-/* src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Your custom CSS below */
 html {
   scroll-behavior: smooth;
 }
 
-/* Custom Utilities */
-@layer utilities {
-  .text-gradient {
-    @apply bg-gradient-to-r from-amber-400 to-amber-600 bg-clip-text text-transparent;
-  }
-  
-  .glass {
-    @apply bg-white/90 backdrop-blur-md;
-  }
-}
-
-/* Selection Color */
-::selection {
-  @apply bg-amber-500/30;
-}
-
-/* Hide Scrollbar Utility */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* Focus Visible for Accessibility */
-:focus-visible {
-  outline: 2px solid #fbbf24;
-  outline-offset: 2px;
+* {
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
