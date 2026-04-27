@@ -28,7 +28,7 @@ const About = () => {
               <p className="text-gray-600 leading-relaxed">
                 For me, photography goes beyond capturing moments; it’s about observing deeply and turning emotions into visual stories. Every journey becomes a canvas, and every frame reflects a piece of art shaped by perspective and feeling.
               </p>
-              <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-white font-medium rounded-xl transition-all shadow-sm">
+              <a href="https://dharamveerkz.github.io/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-white font-medium rounded-xl transition-all shadow-sm">
                 <i className="fas fa-file-pdf"></i> View Resume
               </a>
             </div>
