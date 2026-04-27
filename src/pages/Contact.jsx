@@ -134,22 +134,6 @@ const Contact = () => {
                   </div>
                 </div>
               </div>
-
-              <div>
-                <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">Connect Socially</h3>
-                <div className="flex gap-3">
-                  {[
-                    { icon: "fab fa-github", href: "https://github.com/dharamveerkz" },
-                    { icon: "fab fa-x-twitter", href: "https://x.com/dharamveerkz" },
-                    { icon: "fab fa-instagram", href: "https://www.instagram.com/dharamveerkz/" },
-                    { icon: "fab fa-linkedin-in", href: "https://www.linkedin.com/in/dharamveerkz/" }
-                  ].map((social, i) => (
-                    <a key={i} href={social.href} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-gray-50 border border-gray-200 hover:border-amber-300 hover:bg-amber-50 flex items-center justify-center transition-all">
-                      <i className={`${social.icon} text-gray-600 hover:text-amber-600 transition-colors`}></i>
-                    </a>
-                  ))}
-                </div>
-              </div>
             </div>
 
           </div>
