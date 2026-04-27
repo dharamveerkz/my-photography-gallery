@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
-    <section className="relative pt-24 pb-4 sm:pt-28 sm:pb-6 bg-gradient-to-b from-yellow-500 to-amber-500">
+    <section className="relative pt-24 pb-4 sm:pt-28 sm:pb-6 bg-gradient-to-b from-yellow-500 to-amber-600">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         
         {/* Badge */}
@@ -35,7 +35,7 @@ const HeroSection = () => {
           </Link>
           <Link
             to="/contact"
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-white/90 hover:bg-white border border-amber-300 text-amber-900 font-medium rounded-xl transition-all text-sm"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 mb-4 bg-white/90 hover:bg-white border border-amber-300 text-amber-900 font-medium rounded-xl transition-all text-sm"
           >
             Get in Touch
           </Link>
