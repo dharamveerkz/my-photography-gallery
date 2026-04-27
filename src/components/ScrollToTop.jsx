@@ -19,7 +19,7 @@ const ScrollToTop = () => {
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3 pointer-events-none"
       }`}
     >
-      <i className="fa-solid fa-arrow-up text-base font-medium"></i>
+      <i className="fa-solid fa-arrow-up"></i>
     </button>
   );
 };
