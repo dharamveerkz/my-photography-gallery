@@ -13,20 +13,20 @@ const Footer = () => {
   ];
 
   const footerLinks = {
-    explore: [
-      { label: "About Me", to: "/about" },
-      { label: "Portfolio", to: "/gallery" },
+    discover: [
+      { label: "About", to: "/about" },
       { label: "Contact", to: "/contact" },
-    ],
-    services: [
-      { label: "Photography", to: "/gallery?category=photography" },
-      { label: "Graphic Design", to: "/gallery?category=design" },
-      { label: "Social Media", to: "/services" },
+      { label: "Portfolio", to: "#" },
     ],
     resources: [
-      { label: "Resume", href: "/resume.pdf" },
-      { label: "Courses", href: "https://drive.google.com/drive/folders/your-folder" },
-      { label: "Telegram", href: "https://t.me/+4xorc7fy3vo2NWI1" },
+      { label: "Resume", to: "#" },
+      { label: "Basics", to: "#" },
+      { label: "channel", to: "#" },
+    ],
+    expertise: [
+      { label: "Content Creation", href: "#" },
+      { label: "Graphics Designing", href: "#" },
+      { label: "Ai & Automation", href: "#" },
     ],
   };
 
