@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
-    <section className="relative pt-24 pb-4 sm:pt-28 sm:pb-6 bg-gradient-to-b from-gray-300 via-yellow-500 to-amber-400">
+    <section className="relative pt-24 pb-4 sm:pt-28 sm:pb-6 bg-gradient-to-b from-yellow-500 to-amber-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         
         {/* Badge */}
