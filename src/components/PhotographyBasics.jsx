@@ -1,419 +1,311 @@
 import { useState } from "react";
 
+/* ─── Course Data ─── */
 const sections = [
-  // ... (your sections array remains exactly as you wrote it)
+  {
+    type: "content",
+    title: "Welcome to Photography!",
+    content: "Photography means 'drawing with light'. It's the art of capturing moments and turning them into lasting memories.",
+    points: [
+      "You can use any camera — phone, DSLR, or mirrorless",
+      "Great photography is about seeing light and moments",
+      "Practice is more important than expensive gear",
+    ],
+    icon: "📷",
+  },
+  {
+    type: "quiz",
+    title: "Quick Check #1",
+    questions: [
+      {
+        question: "What does photography literally mean?",
+        options: ["Drawing with light", "Taking pictures", "Making art", "Recording video"],
+        correct: 0,
+      },
+      {
+        question: "What's most important for great photography?",
+        options: ["Expensive camera", "Practice and seeing light", "Big lens", "Flash"],
+        correct: 1,
+      },
+    ],
+  },
+  {
+    type: "content",
+    title: "Your Camera Basics",
+    content: "Every camera has the same basic parts. Understanding them helps you take better photos.",
+    points: [
+      "Shutter button — takes the photo",
+      "Screen/Viewfinder — shows what you're photographing",
+      "Lens — focuses the light",
+      "Mode dial — changes camera settings",
+    ],
+    icon: "📸",
+  },
+  {
+    type: "content",
+    title: "Understanding Aperture",
+    content: "Aperture controls how much light enters your camera and how much of your photo is in focus.",
+    points: [
+      "Low f-number (f/1.8) = Blurry background",
+      "High f-number (f/16) = Everything sharp",
+      "Think of it like your eye's pupil — bigger in dark, smaller in bright light",
+    ],
+    icon: "🔍",
+  },
+  {
+    type: "quiz",
+    title: "Quick Check #2",
+    questions: [
+      {
+        question: "What aperture creates a blurry background?",
+        options: ["f/16", "f/1.8", "f/11", "f/22"],
+        correct: 1,
+      },
+      {
+        question: "Aperture is like what part of your body?",
+        options: ["Your ear", "Your eye's pupil", "Your hand", "Your mouth"],
+        correct: 1,
+      },
+    ],
+  },
+  {
+    type: "content",
+    title: "Shutter Speed",
+    content: "Shutter speed controls how long your camera sees the scene. Fast freezes action, slow creates blur.",
+    points: [
+      "Fast (1/500) — Freezes running, sports",
+      "Slow (1/30) — Creates motion blur",
+      "Too slow = shaky photos (use tripod!)",
+    ],
+    icon: "⚡",
+  },
+  {
+    type: "content",
+    title: "ISO — Light Sensitivity",
+    content: "ISO controls how sensitive your camera is to light. Low ISO for bright light, high ISO for dark.",
+    points: [
+      "ISO 100–400 — Bright daylight (best quality)",
+      "ISO 800–1600 — Indoor/overcast",
+      "ISO 3200+ — Very dark (more grain/noise)",
+    ],
+    icon: "💡",
+  },
+  {
+    type: "quiz",
+    title: "Quick Check #3",
+    questions: [
+      {
+        question: "What shutter speed freezes a running person?",
+        options: ["1/30", "1 second", "1/500", "1/10"],
+        correct: 2,
+      },
+      {
+        question: "What ISO should you use in bright sunlight?",
+        options: ["ISO 3200", "ISO 100", "ISO 1600", "ISO 800"],
+        correct: 1,
+      },
+    ],
+  },
+  {
+    type: "content",
+    title: "Camera Modes Made Simple",
+    content: "Different modes give you different levels of control. Start simple, then advance!",
+    points: [
+      "Auto (Green) — Camera does everything",
+      "Portrait mode — Blurs background automatically",
+      "Sports mode — Freezes action",
+      "Manual (M) — You control everything",
+    ],
+    icon: "🎛️",
+  },
+  {
+    type: "content",
+    title: "Rule of Thirds",
+    content: "The easiest way to improve your composition. Imagine a tic-tac-toe grid on your photo.",
+    points: [
+      "Place your subject where lines cross",
+      "Put horizon on top or bottom line (not middle)",
+      "Creates more interesting photos than centering",
+    ],
+    icon: "📐",
+  },
+  {
+    type: "quiz",
+    title: "Quick Check #4",
+    questions: [
+      {
+        question: "Where should you place your subject using rule of thirds?",
+        options: ["Dead center", "Where grid lines cross", "At the edge", "Anywhere"],
+        correct: 1,
+      },
+      {
+        question: "Which mode is best for freezing sports action?",
+        options: ["Portrait mode", "Sports mode", "Macro mode", "Night mode"],
+        correct: 1,
+      },
+    ],
+  },
+  {
+    type: "content",
+    title: "Leading Lines",
+    content: "Use natural lines in your scene to guide the viewer's eye to your subject.",
+    points: [
+      "Roads, paths, fences, rivers",
+      "Creates depth in your photo",
+      "Draws attention to what matters",
+    ],
+    icon: "➡️",
+  },
+  {
+    type: "content",
+    title: "Lighting — Golden Hour",
+    content: "The best light happens just after sunrise and before sunset. Warm, soft, and magical!",
+    points: [
+      "Golden Hour = 1 hour after sunrise/before sunset",
+      "Soft, warm, flattering light",
+      "Avoid harsh midday sun when possible",
+    ],
+    icon: "🌅",
+  },
+  {
+    type: "quiz",
+    title: "Quick Check #5",
+    questions: [
+      {
+        question: "What creates leading lines in a photo?",
+        options: ["Colors", "Roads and paths", "Shadows", "Clouds"],
+        correct: 1,
+      },
+      {
+        question: "When is Golden Hour?",
+        options: ["Noon", "Midnight", "After sunrise/before sunset", "Any time"],
+        correct: 2,
+      },
+    ],
+  },
+  {
+    type: "content",
+    title: "Your Next Steps",
+    content: "You're ready to start your photography journey! Here's how to keep improving.",
+    points: [
+      "Shoot every day, even just one photo",
+      "Analyse photos you love — why do they work?",
+      "Join communities like 500px or Reddit r/photography",
+      "Experiment freely — the best photos come from risk-taking",
+    ],
+    icon: "🚀",
+  },
+  {
+    type: "complete",
+    title: "Congratulations!",
+    content: "You've completed Photography Basics. You now understand the fundamentals to start your photography journey.",
+    achievements: [
+      "Learned camera basics",
+      "Understood exposure (aperture, shutter, ISO)",
+      "Mastered composition techniques",
+      "Discovered the power of light",
+    ],
+    nextSteps: [
+      "Practice daily — even with your phone",
+      "Study photos you love",
+      "Join photography communities",
+      "Experiment and have fun!",
+    ],
+  },
 ];
 
-/* ─── Complete Inline Styles ─── */
-const styles = {
-  body: {
-    fontFamily: "'DM Sans', sans-serif",
-    background: "#fff",
-    color: "#1a1a2e",
-    minHeight: "100vh",
-    margin: 0,
-  },
-  topbar: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    right: 0,
-    zIndex: 100,
-    background: "#fff",
-    borderBottom: "1px solid #ebebeb",
-  },
-  progLine: (pct) => ({
-    height: 3,
-    background: "linear-gradient(90deg, #b87d1a, #e8a838)",
-    width: `${pct}%`,
-    transition: "width .5s ease",
-  }),
-  topbarInner: {
-    padding: "14px 24px",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  brand: { display: "flex", alignItems: "center", gap: 10 },
-  brandIcon: { fontSize: 20, lineHeight: 1 },
-  brandH1: {
-    fontFamily: "'DM Serif Display', serif",
-    fontSize: "1rem",
-    fontWeight: 400,
-    color: "#1a1a2e",
-    margin: 0,
-  },
-  brandP: { fontSize: ".72rem", color: "#6b6b80", marginTop: 1, margin: 0 },
-  progLabel: { fontSize: ".78rem", fontWeight: 600, color: "#b87d1a" },
-  main: {
-    padding: "72px 24px 64px",
-    maxWidth: 640,
-    margin: "0 auto",
-  },
-  sIcon: { fontSize: "2rem", display: "block", marginBottom: 18 },
-  sTitle: {
-    fontFamily: "'DM Serif Display', serif",
-    fontSize: "clamp(1.7rem, 5vw, 2.2rem)",
-    fontWeight: 400,
-    lineHeight: 1.2,
-    marginBottom: 8,
-    margin: 0,
-  },
-  sContent: {
-    fontSize: "1.05rem",
-    lineHeight: 1.6,
-    color: "#3a3a5a",
-    marginBottom: 20,
-  },
-  pointsList: {
-    listStyle: "none",
-    padding: 0,
-    margin: "0 0 24px 0",
-  },
-  pointsItem: {
-    display: "flex",
-    alignItems: "flex-start",
-    gap: 12,
-    padding: "10px 0",
-    fontSize: "1rem",
-    color: "#3a3a5a",
-    lineHeight: 1.5,
-  },
-  pointsItemFirst: { paddingTop: 0 },
-  pointDot: {
-    display: "inline-block",
-    width: 8,
-    height: 8,
-    borderRadius: "50%",
-    background: "#b87d1a",
-    marginTop: 7,
-    flexShrink: 0,
-  },
-  tip: {
-    background: "#fff8e6",
-    borderLeft: "3px solid #e8a838",
-    padding: "12px 16px",
-    borderRadius: "0 8px 8px 0",
-    fontSize: ".95rem",
-    margin: "24px 0",
-    color: "#5a5a7a",
-  },
-  divider: {
-    height: 1,
-    background: "linear-gradient(90deg, transparent, #ebebeb, transparent)",
-    margin: "24px 0",
-  },
-  // Navigation
-  navRow: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginTop: 32,
-    paddingTop: 20,
-    borderTop: "1px solid #ebebeb",
-  },
-  navBtn: {
-    background: "#fff",
-    border: "1px solid #d0d0e0",
-    color: "#1a1a2e",
-    padding: "10px 20px",
-    borderRadius: 8,
-    fontSize: ".95rem",
-    fontWeight: 500,
-    cursor: "pointer",
-    transition: "all .2s ease",
-  },
-  navBtnDisabled: {
-    opacity: 0.5,
-    cursor: "not-allowed",
-  },
-  navBtnPrimary: {
-    background: "#b87d1a",
-    borderColor: "#b87d1a",
-    color: "#fff",
-  },
-  // Quiz styles
-  quizIntro: {
-    fontSize: ".95rem",
-    color: "#6b6b80",
-    marginBottom: 24,
-    fontStyle: "italic",
-  },
-  qSep: { height: 20 },
-  qLabel: {
-    fontSize: ".8rem",
-    fontWeight: 600,
-    color: "#b87d1a",
-    textTransform: "uppercase",
-    letterSpacing: "0.5px",
-    margin: "0 0 6px 0",
-  },
-  qText: {
-    fontSize: "1.1rem",
-    fontWeight: 500,
-    margin: "0 0 14px 0",
-    lineHeight: 1.4,
-  },
-  options: {
-    display: "flex",
-    flexDirection: "column",
-    gap: 10,
-    marginBottom: 20,
-  },
-  optBase: {
-    textAlign: "left",
-    padding: "12px 16px",
-    border: "2px solid #d0d0e0",
-    borderRadius: 10,
-    background: "#fff",
-    fontSize: "1rem",
-    cursor: "pointer",
-    transition: "all .15s ease",
-    color: "#1a1a2e",
-  },
-  optSelected: {
-    borderColor: "#b87d1a",
-    background: "#fffaf0",
-    fontWeight: 500,
-  },
-  optCorrect: {
-    borderColor: "#22c55e",
-    background: "#f0fdf4",
-    fontWeight: 600,
-  },
-  optWrong: {
-    borderColor: "#ef4444",
-    background: "#fef2f2",
-    textDecoration: "line-through",
-    opacity: 0.8,
-  },
-  btnCheck: {
-    width: "100%",
-    padding: "14px",
-    background: "#b87d1a",
-    color: "#fff",
-    border: "none",
-    borderRadius: 10,
-    fontSize: "1rem",
-    fontWeight: 600,
-    cursor: "pointer",
-    transition: "background .2s ease",
-  },
-  btnCheckDisabled: {
-    background: "#d0d0e0",
-    cursor: "not-allowed",
-  },
-  scoreRow: {
-    display: "flex",
-    alignItems: "center",
-    gap: 14,
-    padding: "16px",
-    background: "#f8fafc",
-    borderRadius: 12,
-    marginBottom: 24,
-    border: "1px solid #ebebeb",
-  },
-  scoreEmoji: { fontSize: "1.5rem" },
-  scoreNum: {
-    margin: 0,
-    fontSize: "1.1rem",
-    fontWeight: 600,
-    color: "#1a1a2e",
-  },
-  scoreSubtext: {
-    margin: "4px 0 0 0",
-    fontSize: ".9rem",
-    color: "#6b6b80",
-  },
-  // Completion styles
-  completeIcon: {
-    fontSize: "3rem",
-    display: "block",
-    textAlign: "center",
-    marginBottom: 12,
-  },
-  completeTitle: {
-    fontFamily: "'DM Serif Display', serif",
-    fontSize: "clamp(1.8rem, 6vw, 2.4rem)",
-    textAlign: "center",
-    margin: "0 0 12px 0",
-    color: "#1a1a2e",
-  },
-  completeSub: {
-    textAlign: "center",
-    fontSize: "1.05rem",
-    color: "#3a3a5a",
-    lineHeight: 1.6,
-    marginBottom: 28,
-  },
-  completeGroupLabel: {
-    fontSize: ".85rem",
-    fontWeight: 600,
-    color: "#6b6b80",
-    textTransform: "uppercase",
-    letterSpacing: "0.5px",
-    margin: "24px 0 12px 0",
-  },
-  completeList: {
-    listStyle: "none",
-    padding: 0,
-    margin: 0,
-  },
-  completeItem: {
-    display: "flex",
-    alignItems: "flex-start",
-    gap: 12,
-    padding: "10px 0",
-    fontSize: "1rem",
-    color: "#3a3a5a",
-  },
-  completeItemFirst: { paddingTop: 0 },
-  completeCheck: {
-    color: "#22c55e",
-    fontWeight: "bold",
-    fontSize: "1.1rem",
-    marginTop: 2,
-  },
-  completeFooter: {
-    textAlign: "center",
-    fontSize: "1.1rem",
-    fontWeight: 500,
-    color: "#b87d1a",
-    marginTop: 32,
-    paddingTop: 24,
-    borderTop: "1px solid #ebebeb",
-  },
-  // Progress dots
-  dotsWrap: {
-    display: "flex",
-    justifyContent: "center",
-    gap: 8,
-    marginTop: 40,
-    paddingTop: 24,
-    borderTop: "1px solid #ebebeb",
-  },
-  dotBase: {
-    width: 10,
-    height: 10,
-    borderRadius: "50%",
-    border: "2px solid #d0d0e0",
-    background: "#fff",
-    cursor: "pointer",
-    transition: "all .2s ease",
-    padding: 0,
-  },
-  dotActive: {
-    borderColor: "#b87d1a",
-    background: "#b87d1a",
-    transform: "scale(1.15)",
-  },
-  dotDone: {
-    background: "#22c55e",
-    borderColor: "#22c55e",
-  },
-};
-
-/* ─── Helper Components ─── */
+/* ─── Navigation Row Component ─── */
 function NavRow({ current, total, nextDisabled, onPrev, onNext }) {
+  const isLast = current >= total - 2; // Check if we are at the second to last section (since last is 'complete')
+  
   return (
-    <div style={styles.navRow}>
+    <div className="flex gap-2 mt-10 pt-6 border-t border-gray-100">
       <button
-        style={{
-          ...styles.navBtn,
-          ...(current === 0 ? styles.navBtnDisabled : {}),
-        }}
         disabled={current === 0}
         onClick={onPrev}
+        className="flex-1 py-3 px-4 rounded-lg text-sm font-semibold bg-gray-100 text-gray-800 hover:bg-gray-200 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
       >
-        ← Previous
+        ← Back
       </button>
-      <span style={{ fontSize: ".9rem", color: "#6b6b80" }}>
-        {current + 1} / {total}
-      </span>
       <button
-        style={{
-          ...styles.navBtn,
-          ...styles.navBtnPrimary,
-          ...(nextDisabled ? styles.navBtnDisabled : {}),
-        }}
         disabled={nextDisabled}
         onClick={onNext}
+        className="flex-1 py-3 px-4 rounded-lg text-sm font-semibold bg-amber-400 text-white hover:bg-amber-500 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
       >
-        {current === total - 1 ? "Finish" : "Next"} →
+        {isLast ? "Finish →" : "Next →"}
       </button>
     </div>
   );
 }
 
+/* ─── Content Section Component ─── */
 function ContentSection({ section, current, total, onPrev, onNext }) {
   return (
     <>
-      <span style={styles.sIcon}>{section.icon}</span>
-      <h2 style={styles.sTitle}>{section.title}</h2>
-      <div style={styles.divider} />
-      <p style={styles.sContent}>{section.content}</p>
+      <span className="text-3xl block mb-4">{section.icon}</span>
+      <h2 className="text-2xl sm:text-3xl font-serif font-normal text-gray-900 leading-tight mb-2">
+        {section.title}
+      </h2>
+      <div className="w-9 h-0.5 bg-amber-400 my-4" />
+      <p className="text-gray-500 leading-relaxed mb-8">{section.content}</p>
 
-      <ul style={styles.pointsList}>
+      <ul className="mb-9 divide-y divide-gray-100 border-t border-gray-100">
         {section.points.map((point, i) => (
-          <li
-            key={i}
-            style={{
-              ...styles.pointsItem,
-              ...(i === 0 ? styles.pointsItemFirst : {}),
-            }}
-          >
-            <span style={styles.pointDot} />
+          <li key={i} className="flex items-start gap-3 py-3.5 text-sm text-gray-800 leading-relaxed">
+            <span className="mt-2 w-1.5 h-1.5 rounded-full bg-amber-400 flex-shrink-0" />
             {point}
           </li>
         ))}
       </ul>
 
-      <p style={styles.tip}>
-        <strong style={{ color: "#b87d1a", fontWeight: 600 }}>Pro tip:</strong>{" "}
+      <p className="text-sm text-gray-500 leading-relaxed pl-3 border-l-2 border-amber-400 mb-10">
+        <strong className="text-amber-700 font-semibold">Pro tip:</strong>{" "}
         Don't worry about getting everything perfect. Photography is about practice and having fun!
       </p>
 
-      <NavRow
-        current={current}
-        total={total}
-        nextDisabled={false}
-        onPrev={onPrev}
-        onNext={onNext}
-      />
+      <NavRow current={current} total={total} nextDisabled={false} onPrev={onPrev} onNext={onNext} />
     </>
   );
 }
 
+/* ─── Quiz Section Component ─── */
 function QuizSection({ section, current, total, quizAnswers, quizScore, onAnswer, onCheck, onPrev, onNext }) {
   const allAnswered = Object.keys(quizAnswers).length >= section.questions.length;
 
-  function getOptStyle(qi, oi, correct) {
+  function optClass(qi, oi, correct) {
+    const base = "w-full text-left px-4 py-3 rounded-lg text-sm border transition-colors cursor-pointer disabled:cursor-not-allowed ";
     if (quizScore !== null) {
-      if (oi === correct) return { ...styles.optBase, ...styles.optCorrect };
-      if (quizAnswers[qi] === oi) return { ...styles.optBase, ...styles.optWrong };
-    } else if (quizAnswers[qi] === oi) {
-      return { ...styles.optBase, ...styles.optSelected };
+      if (oi === correct) return base + "border-green-400 text-green-800 bg-green-50";
+      if (quizAnswers[qi] === oi) return base + "border-red-400 text-red-800 bg-red-50";
+      return base + "border-gray-200 text-gray-400 bg-white";
     }
-    return styles.optBase;
+    if (quizAnswers[qi] === oi) return base + "border-amber-400 text-amber-800";
+    return base + "border-gray-200 text-gray-800 bg-white hover:border-amber-300";
   }
 
   return (
     <>
-      <h2 style={{ ...styles.sTitle, marginBottom: 8 }}>{section.title}</h2>
-      <p style={styles.quizIntro}>Answer all questions to continue</p>
+      <h2 className="text-2xl sm:text-3xl font-serif font-normal text-gray-900 leading-tight mb-2">
+        {section.title}
+      </h2>
+      <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-8">
+        Answer all questions to continue
+      </p>
 
       {section.questions.map((q, qi) => (
         <div key={qi}>
-          {qi > 0 && <div style={styles.qSep} />}
-          <p style={styles.qLabel}>Question {qi + 1}</p>
-          <p style={styles.qText}>{q.question}</p>
-          <div style={styles.options}>
+          {qi > 0 && <div className="h-px bg-gray-100 my-7" />}
+          <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">
+            Question {qi + 1}
+          </p>
+          <p className="font-serif text-lg text-gray-900 leading-snug mb-4">{q.question}</p>
+          <div className="flex flex-col gap-2">
             {q.options.map((opt, oi) => (
               <button
                 key={oi}
-                style={getOptStyle(qi, oi, q.correct)}
                 disabled={quizScore !== null}
                 onClick={() => onAnswer(qi, oi)}
+                className={optClass(qi, oi, q.correct)}
               >
                 {opt}
               </button>
@@ -424,85 +316,71 @@ function QuizSection({ section, current, total, quizAnswers, quizScore, onAnswer
 
       {quizScore === null ? (
         <button
-          style={{
-            ...styles.btnCheck,
-            ...(!allAnswered ? styles.btnCheckDisabled : {}),
-          }}
           disabled={!allAnswered}
           onClick={onCheck}
+          className="w-full mt-7 py-3.5 rounded-lg text-sm font-semibold bg-gray-900 text-white hover:bg-gray-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
         >
           Check answers
         </button>
       ) : (
         <>
-          <div style={styles.scoreRow}>
-            <span style={styles.scoreEmoji}>
+          <div className="mt-7 pt-6 border-t border-gray-100 flex items-center gap-4">
+            <span className="text-3xl">
               {quizScore === section.questions.length ? "🎉" : "👍"}
             </span>
             <div>
-              <p style={styles.scoreNum}>
+              <p className="font-serif text-xl text-gray-900">
                 {quizScore}/{section.questions.length} correct
               </p>
-              <p style={styles.scoreSubtext}>
+              <p className="text-sm text-gray-500 mt-0.5">
                 {quizScore === section.questions.length
                   ? "Perfect — ready to continue!"
                   : "Keep going — you can review later."}
               </p>
             </div>
           </div>
-          <NavRow
-            current={current}
-            total={total}
-            nextDisabled={false}
-            onPrev={onPrev}
-            onNext={onNext}
-          />
+          <NavRow current={current} total={total} nextDisabled={false} onPrev={onPrev} onNext={onNext} />
         </>
       )}
     </>
   );
 }
 
+/* ─── Complete Section Component ─── */
 function CompleteSection({ section }) {
   return (
     <>
-      <span style={styles.completeIcon}>🏆</span>
-      <h2 style={styles.completeTitle}>{section.title}</h2>
-      <p style={styles.completeSub}>{section.content}</p>
+      <span className="text-5xl block mb-5">🏆</span>
+      <h2 className="text-3xl sm:text-4xl font-serif font-normal text-gray-900 mb-3">{section.title}</h2>
+      <p className="text-gray-500 leading-relaxed mb-9">{section.content}</p>
 
-      <p style={styles.completeGroupLabel}>What you learned</p>
-      <ul style={styles.completeList}>
+      <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-3">
+        What you learned
+      </p>
+      <ul className="mb-9 divide-y divide-gray-100 border-t border-gray-100">
         {section.achievements.map((a, i) => (
-          <li
-            key={i}
-            style={{
-              ...styles.completeItem,
-              ...(i === 0 ? styles.completeItemFirst : {}),
-            }}
-          >
-            <span style={styles.completeCheck}>✓</span>
+          <li key={i} className="flex items-start gap-3 py-3 text-sm text-gray-800 leading-relaxed">
+            <span className="text-green-500 font-bold flex-shrink-0 mt-0.5">✓</span>
             {a}
           </li>
         ))}
       </ul>
 
-      <p style={styles.completeGroupLabel}>Next steps</p>
-      <ul style={styles.completeList}>
+      <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-3">
+        Next steps
+      </p>
+      <ul className="divide-y divide-gray-100 border-t border-gray-100">
         {section.nextSteps.map((s, i) => (
-          <li
-            key={i}
-            style={{
-              ...styles.completeItem,
-              ...(i === 0 ? styles.completeItemFirst : {}),
-            }}
-          >
-            <span style={styles.completeCheck}>✓</span>
+          <li key={i} className="flex items-start gap-3 py-3 text-sm text-gray-800 leading-relaxed">
+            <span className="text-green-500 font-bold flex-shrink-0 mt-0.5">✓</span>
             {s}
           </li>
         ))}
       </ul>
 
-      <p style={styles.completeFooter}>Keep creating amazing photos 📸</p>
+      <p className="text-sm text-gray-400 mt-8 pt-6 border-t border-gray-100">
+        Keep creating amazing photos 📸
+      </p>
     </>
   );
 }
@@ -533,7 +411,6 @@ export default function PhotographyBasics() {
   }
 
   // Auto-mark content sections as completed on view
-  // Note: In production, consider using useEffect to avoid render-side effects
   if (section.type === "content" && !completed.includes(current)) {
     markCompleted(current);
   }
@@ -543,47 +420,41 @@ export default function PhotographyBasics() {
   }
 
   function handleCheck() {
-    const q = section;
     let correct = 0;
-    q.questions.forEach((item, i) => {
-      if (quizAnswers[i] === item.correct) correct++;
+    section.questions.forEach((q, i) => {
+      if (quizAnswers[i] === q.correct) correct++;
     });
     setQuizScore(correct);
-    if (correct === q.questions.length) markCompleted(current);
-  }
-
-  function dotStyle(i) {
-    if (i === current) return { ...styles.dotBase, ...styles.dotActive };
-    if (completed.includes(i)) return { ...styles.dotBase, ...styles.dotDone };
-    return styles.dotBase;
+    if (correct === section.questions.length) markCompleted(current);
   }
 
   return (
-    <div style={styles.body}>
-      {/* Google Fonts */}
-      <link
-        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap"
-        rel="stylesheet"
-      />
-
-      {/* Top bar */}
-      <div style={styles.topbar}>
-        <div style={styles.progLine(pct)} />
-        <div style={styles.topbarInner}>
-          <div style={styles.brand}>
-            <span style={styles.brandIcon}>📷</span>
-            <div>
-              <h1 style={styles.brandH1}>Photography Basics</h1>
-              <p style={styles.brandP}>Section {current + 1} of {total}</p>
-            </div>
+    // ✅ pt-20 adds ~80px top padding to clear your fixed Navbar
+    <div className="bg-white min-h-screen pt-20 pb-12">
+      
+      {/* ── Progress Bar (Scrolls with content, NOT fixed) ── */}
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 mb-8">
+        <div className="border-b border-gray-100">
+          <div className="h-1 bg-gray-100 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-amber-400 transition-all duration-500 ease-out"
+              style={{ width: `${pct}%` }}
+            />
           </div>
-          <span style={styles.progLabel}>{pct}%</span>
+          <div className="flex justify-between items-center py-3">
+            <span className="text-xs text-gray-400 font-medium">
+              Section {current + 1} of {total}
+            </span>
+            <span className="text-xs font-semibold text-amber-700">{pct}%</span>
+          </div>
         </div>
       </div>
 
-      {/* Main content */}
-      <main style={styles.main} key={current}>
+      {/* ── Content Area ── */}
+      <div className="max-w-3xl mx-auto px-4 sm:px-6" key={current}>
+        
         {section.type === "complete" && <CompleteSection section={section} />}
+        
         {section.type === "content" && (
           <ContentSection
             section={section}
@@ -593,6 +464,7 @@ export default function PhotographyBasics() {
             onNext={onNext}
           />
         )}
+
         {section.type === "quiz" && (
           <QuizSection
             section={section}
@@ -607,18 +479,26 @@ export default function PhotographyBasics() {
           />
         )}
 
-        {/* Progress dots */}
-        <div style={styles.dotsWrap}>
+        {/* ── Progress Dots ── */}
+        <div className="flex justify-center flex-wrap gap-2 mt-12 pb-8">
           {sections.map((_, i) => (
             <button
               key={i}
-              style={dotStyle(i)}
               aria-label={`Go to section ${i + 1}`}
               onClick={() => goTo(i)}
+              className={[
+                "h-2 rounded-full border-none cursor-pointer transition-all duration-200",
+                i === current
+                  ? "w-6 bg-amber-400"
+                  : completed.includes(i)
+                  ? "w-2 bg-green-400"
+                  : "w-2 bg-gray-200 hover:bg-gray-300",
+              ].join(" ")}
             />
           ))}
         </div>
-      </main>
+
+      </div>
     </div>
   );
 }
