@@ -19,7 +19,7 @@ const Footer = () => {
       { label: "Learn Now", to: "/basics" },
     ],
     resources: [
-      { label: "Resume", to: "/resume.pdf" },
+      { label: "Resume", href: "https://dharamveerkz.github.io/" },
       { label: "Pexels", href: "https://www.pexels.com/@dharamveer" },
       { label: "channel", href: "https://t.me/modfusionhub" }, // ✅ FIXED
     ],
