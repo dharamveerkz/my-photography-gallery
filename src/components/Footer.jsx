@@ -16,17 +16,17 @@ const Footer = () => {
     discover: [
       { label: "About", to: "/about" },
       { label: "Contact", to: "/contact" },
-      { label: "Basics", to: "/basics" },
+      { label: "Learn Now", to: "/basics" },
     ],
     resources: [
-      { label: "Resume", to: "#" },
-      { label: "Courses", to: "" },
+      { label: "Resume", to: "/resume.pdf" },
+      { label: "Pexels", href: "https://www.pexels.com/@dharamveer" },
       { label: "channel", href: "https://t.me/modfusionhub" }, // ✅ FIXED
     ],
     expertise: [
-      { label: "Content Creation", href: "#" },
-      { label: "Graphics Designing", href: "#" },
-      { label: "Ai & Automation", href: "#" },
+      { label: "Content Creation", href: "https://graphicdesigningportfolio.vercel.app/" },
+      { label: "Graphics Designing", href: "https://graphicdesigningportfolio.vercel.app/" },
+      { label: "Ai & Automation", href: "https://graphicdesigningportfolio.vercel.app/" },
     ],
   };
 
