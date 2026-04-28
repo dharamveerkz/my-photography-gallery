@@ -809,6 +809,4 @@ export default function PhotographyBasics() {
       </main>
     </div>
   );
-};
-
-export default PhotographyBasics;
+}
