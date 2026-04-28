@@ -16,11 +16,11 @@ const Footer = () => {
     discover: [
       { label: "About", to: "/about" },
       { label: "Contact", to: "/contact" },
-      { label: "Portfolio", to: "#" },
+      { label: "Basics", to: "/basics" },
     ],
     resources: [
       { label: "Resume", to: "#" },
-      { label: "Basics", to: "#" },
+      { label: "Courses", to: "" },
       { label: "channel", href: "https://t.me/modfusionhub" }, // ✅ FIXED
     ],
     expertise: [
