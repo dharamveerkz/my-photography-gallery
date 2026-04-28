@@ -1,31 +1,33 @@
 import React from "react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import PhotographyBasics from "../components/PhotographyBasics";
 
 const Basics = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Page Header */}
-        <header className="text-center mb-10">
-          <h1 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500 mb-4">
-            📷 Photography Basics
-          </h1>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-            Master the fundamentals of photography through interactive lessons, quizzes, and hands-on exercises.
-          </p>
-        </header>
+    <>
+      <Navbar />
+      <main className="pt-24 pb-16 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Course Component */}
-        <main className="bg-white/5 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/10 overflow-hidden">
-          <PhotographyBasics />
-        </main>
+          {/* Header */}
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold text-gray-900 mb-3">Photography Basics</h1>
+            <div className="w-16 h-1 bg-amber-500 mx-auto rounded-full"></div>
+            <p className="mt-4 text-gray-600 leading-relaxed max-w-2xl mx-auto">
+              Master the fundamentals of photography through interactive lessons, quizzes, and hands-on exercises.
+            </p>
+          </div>
 
-        {/* Footer / Credits */}
-        <footer className="mt-10 text-center text-gray-400 text-sm">
-          <p>Learn • Practice • Capture • Share</p>
-        </footer>
-      </div>
-    </div>
+          {/* Course Module Wrapper */}
+          <div className="bg-gray-50 rounded-2xl p-2 sm:p-4 border border-gray-100 shadow-sm overflow-hidden">
+            <PhotographyBasics />
+          </div>
+
+        </div>
+      </main>
+      <Footer />
+    </>
   );
 };
 
