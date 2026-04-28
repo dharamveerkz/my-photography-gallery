@@ -21,7 +21,7 @@ const Footer = () => {
     resources: [
       { label: "Resume", to: "#" },
       { label: "Basics", to: "#" },
-      { label: "channel", to: href: "https://t.me/modfusionhub" },
+      { label: "channel", href: "https://t.me/modfusionhub" },
     ],
     expertise: [
       { label: "Content Creation", href: "#" },
