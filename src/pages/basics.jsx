@@ -550,3 +550,141 @@ const PhotographyBasics = () => {
               {quizScore === null ? (
                 <button
                   onClick={calculateScore}
+                  className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-4 rounded-xl transition-all transform hover:scale-105"
+                >
+                  Check Answers
+                </button>
+              ) : (
+                <div className="text-center p-6 bg-gradient-to-r from-green-600/20 to-emerald-600/20 rounded-xl border border-green-500/50">
+                  <p className="text-3xl font-bold text-green-400 mb-2">
+                    Score: {quizScore}/{currentSectionData.quiz.length}
+                  </p>
+                  <p className="text-gray-300">
+                    {quizScore === currentSectionData.quiz.length 
+                      ? '🎉 Perfect! You mastered this section!' 
+                      : 'Keep practicing! Review the material and try again.'}
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Matching Exercise */}
+          {currentSlide === currentSectionData.slides.length && currentSectionData.matching && !currentSectionData.quiz && (
+            <div className="space-y-6">
+              <h3 className="text-2xl font-bold mb-6 text-purple-400">🔄 Matching Exercise</h3>
+              <p className="text-gray-300 mb-4">Click a term, then click its matching definition</p>
+              
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-3">
+                  <h4 className="font-semibold text-yellow-400 mb-3">Terms</h4>
+                  {currentSectionData.matching.pairs.map((pair, idx) => (
+                    <button
+                      key={`term-${idx}`}
+                      onClick={() => handleMatchingClick('term', pair.term)}
+                      className={`w-full p-4 rounded-lg text-left transition-all ${
+                        selectedTerm === pair.term
+                          ? 'bg-purple-600 text-white'
+                          : matchingPairs.find(p => p.term === pair.term)
+                          ? 'bg-green-600 text-white'
+                          : 'bg-gray-700 hover:bg-gray-600'
+                      }`}
+                    >
+                      {pair.term}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="space-y-3">
+                  <h4 className="font-semibold text-blue-400 mb-3">Definitions</h4>
+                  {currentSectionData.matching.pairs.map((pair, idx) => (
+                    <button
+                      key={`def-${idx}`}
+                      onClick={() => handleMatchingClick('definition', pair.definition)}
+                      className={`w-full p-4 rounded-lg text-left transition-all ${
+                        matchingPairs.find(p => p.definition === pair.definition)
+                          ? 'bg-green-600 text-white'
+                          : 'bg-gray-700 hover:bg-gray-600'
+                      }`}
+                    >
+                      {pair.definition}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {matchingPairs.length === currentSectionData.matching.pairs.length && (
+                <div className="text-center p-6 bg-gradient-to-r from-green-600/20 to-emerald-600/20 rounded-xl border border-green-500/50">
+                  <p className="text-2xl font-bold text-green-400">🎉 All Matched!</p>
+                </div>
+              )}
+
+              <button
+                onClick={resetMatching}
+                className="w-full bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-xl transition-all"
+              >
+                Reset Exercise
+              </button>
+            </div>
+          )}
+
+          {/* Navigation Buttons */}
+          <div className="flex justify-between mt-8 pt-6 border-t border-gray-700">
+            <button
+              onClick={prevSection}
+              disabled={currentSection === 0}
+              className="px-6 py-3 rounded-lg bg-gray-700 hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium"
+            >
+              ← Previous Section
+            </button>
+
+            <div className="flex gap-3">
+              {currentSlide > 0 && (
+                <button
+                  onClick={prevSlide}
+                  className="px-6 py-3 rounded-lg bg-gray-700 hover:bg-gray-600 transition-all font-medium"
+                >
+                  ← Back
+                </button>
+              )}
+              
+              {(currentSlide < currentSectionData.slides.length || currentSectionData.quiz || currentSectionData.matching) && (
+                <button
+                  onClick={currentSlide < currentSectionData.slides.length ? nextSlide : nextSection}
+                  className="px-6 py-3 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all font-medium"
+                >
+                  {currentSlide < currentSectionData.slides.length - 1 || (!currentSectionData.quiz && !currentSectionData.matching) 
+                    ? 'Next →' 
+                    : currentSection === sections.length - 1 
+                    ? 'Finish Course' 
+                    : 'Next Section →'}
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Quick Reference Card */}
+        <div className="mt-8 bg-gradient-to-r from-yellow-600/20 to-orange-600/20 rounded-2xl p-6 border border-yellow-500/30">
+          <h3 className="text-xl font-bold mb-4 text-yellow-400">📋 Quick Settings Reference</h3>
+          <div className="grid md:grid-cols-3 gap-4 text-sm">
+            <div className="bg-gray-800/50 p-4 rounded-lg">
+              <p className="font-semibold text-blue-400 mb-2">Bright Sunlight</p>
+              <p className="text-gray-300">f/8-f/11 • 1/200-1/500s • ISO 100-200</p>
+            </div>
+            <div className="bg-gray-800/50 p-4 rounded-lg">
+              <p className="font-semibold text-purple-400 mb-2">Portrait</p>
+              <p className="text-gray-300">f/1.8-f/4 • 1/125-1/250s • ISO 100-800</p>
+            </div>
+            <div className="bg-gray-800/50 p-4 rounded-lg">
+              <p className="font-semibold text-green-400 mb-2">Low Light</p>
+              <p className="text-gray-300">f/2.8+ • 1/60-1/125s • ISO 1600-3200</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PhotographyBasics;
