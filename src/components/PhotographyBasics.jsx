@@ -332,7 +332,6 @@ const PhotographyBasics = () => {
               {/* Section Body */}
               <div className="p-6 md:p-10">
                 {!isQuiz ? (
-                  /* Content Section */}
                   <div className="space-y-8">
                     <p className="text-xl text-gray-800 leading-relaxed font-medium">
                       {currentData.content}
@@ -362,7 +361,6 @@ const PhotographyBasics = () => {
                     </div>
                   </div>
                 ) : (
-                  /* Quiz Section */}
                   <div className="space-y-8">
                     <div className="bg-blue-50 border-4 border-blue-300 rounded-2xl p-6">
                       <p className="text-blue-800 font-bold text-xl flex items-center gap-3">
@@ -411,7 +409,7 @@ const PhotographyBasics = () => {
                         disabled={Object.keys(quizAnswers).length < currentData.questions.length}
                         className="w-full bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 hover:from-amber-600 hover:via-yellow-600 hover:to-amber-700 disabled:from-gray-300 disabled:via-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed text-white font-bold py-5 rounded-2xl shadow-xl transition-all transform hover:scale-105 text-xl"
                       >
-                        Check My Answers ✓
+                        Check My Answers
                       </button>
                     ) : (
                       <div className={`text-center p-8 rounded-2xl border-4 ${
